@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OnlineStore</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_categories">Categories</string>
+    <string name="menu_cart">Cart</string>
+    <string name="menu_recipes">Recipes</string>
+    <string name="menu_profile">Profile</string>
+    <string name="shared_pref_name">User data preferences</string>
+</resources>
