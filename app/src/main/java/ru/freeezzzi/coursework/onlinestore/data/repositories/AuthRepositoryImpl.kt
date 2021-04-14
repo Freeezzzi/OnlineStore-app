@@ -41,9 +41,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun register(
         username: String,
-        password: String,
-        name: String,
-        isMentor: Boolean
+        name: String
     ): OperationResult<Unit, String?> =
         try {
             /*val user = serverApi.register(

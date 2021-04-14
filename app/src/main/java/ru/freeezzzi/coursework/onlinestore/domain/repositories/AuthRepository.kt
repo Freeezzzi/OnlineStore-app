@@ -11,13 +11,10 @@ interface AuthRepository {
 
     suspend fun register(
         username: String,
-        password: String,
         name: String,
-        isMentor: Boolean
     ): OperationResult<Unit, String?>
 
     fun observeUser(): LiveData<User?>
 
     fun logOut()
-
 }
