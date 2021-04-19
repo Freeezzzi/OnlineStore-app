@@ -1,13 +1,13 @@
 package ru.freeezzzi.coursework.onlinestore.di
 
 import android.content.Context
-import com.github.terrakok.cicerone.Router
 import dagger.BindsInstance
 import dagger.Component
 import ru.freeezzzi.coursework.onlinestore.App
 import ru.freeezzzi.coursework.onlinestore.di.modules.AppModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.DataModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.NetworkModule
+import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesRepository
 import ru.freeezzzi.coursework.onlinestore.ui.MainActivity
 import javax.inject.Named
 import javax.inject.Singleton
@@ -15,11 +15,9 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class, DataModule::class, NetworkModule::class])
 interface AppComponent {
-    fun provideRouter(): Router
+    // fun provideRouter(): Router
 
-/*    fun provideCompaniesRepository(): CompaniesRepository
-
-    fun provideFavoriteCompaniesDatabase(): FavoriteCompaniesDatabase*/
+    fun provideCategoriesRepository(): CategoriesRepository
 
     fun inject(app: App)
 

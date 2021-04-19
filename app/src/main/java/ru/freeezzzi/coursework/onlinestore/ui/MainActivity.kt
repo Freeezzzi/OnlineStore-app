@@ -3,25 +3,27 @@ package ru.freeezzzi.coursework.onlinestore.ui
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.Router
-import com.github.terrakok.cicerone.androidx.AppNavigator
+import androidx.navigation.fragment.NavHostFragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.freeezzzi.coursework.onlinestore.App
 import ru.freeezzzi.coursework.onlinestore.R
+import ru.freeezzzi.coursework.onlinestore.databinding.ActivityMainBinding
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.MainPageFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    @Inject
-    lateinit var navigatorHolder: NavigatorHolder
+    private val binding by viewBinding(ActivityMainBinding::bind)
+    /*@Inject
+    lateinit var navigatorHolder: NavigatorHolder*/
 
-    @Inject
-    lateinit var router: Router
+    /*@Inject
+    lateinit var router: Router*/
 
     @Inject
     lateinit var authRepository: AuthRepository
 
-    private val navigator = AppNavigator(this, R.id.container)
+    //private val navigator = AppNavigator(this, R.id.container)
 
     private val currentFragment: BaseFragment?
         get() = supportFragmentManager.findFragmentById(R.id.container) as? BaseFragment
@@ -32,6 +34,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, MainPageFragment())
+            .commit()
 
         // TODO открывать экран логина
         /*if (savedInstanceState == null) {
@@ -49,10 +55,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        navigatorHolder.setNavigator(navigator)
+        //navigatorHolder.setNavigator(navigator)
     }
 
     override fun onBackPressed() {
         currentFragment?.onBackPressed() ?: super.onBackPressed()
+    }
+
+    private fun setNavigator(){
+        val host: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragment_container) as NavHostFragment? ?: return
+        val navController = host.navController
     }
 }

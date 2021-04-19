@@ -12,4 +12,8 @@ class ProductsRepositoryImpl @Inject constructor(
     override suspend fun getAllProducts(): OperationResult<List<Product>, String?> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getProductsByCategory(category: String): OperationResult<List<Product>, String?> {
+        TODO("Not yet implemented")
+    }
 }

@@ -2,10 +2,9 @@ package ru.freeezzzi.coursework.onlinestore
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.github.terrakok.cicerone.androidx.Creator
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.home.HomeFragment
 
+/*
 object Screens {
     fun homeFragment(): FragmentScreen =
         FragmentScreen(
@@ -16,4 +15,4 @@ object Screens {
         override fun create(argument: FragmentFactory): Fragment =
             fragment
     }
-}
+}*/
