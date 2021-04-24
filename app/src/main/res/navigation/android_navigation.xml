@@ -1,51 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/android_navigation"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@+id/navigation_home">
 
+    <include app:graph = "@navigation/navigation_home"/>
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.home.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/home_fragment"/>
-    <fragment
-        android:id="@+id/navigation_cart"
-        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartFragment"
-        android:label="CartFragment"
-        tools:layout="@layout/cart_fragment"/>
-    <fragment
-        android:id="@+id/navigation_categories"
-        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.category.CategoriesFragment"
-        android:label="CategoriesFragment"
-        tools:layout="@layout/categories_fragment">
-        <action
-            android:id="@+id/action_open_sales_from_category"
-            app:destination="@+id/sales_fragment"
-        />
-    </fragment>
-    <fragment
-        android:id="@+id/navigation_profile"
-        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.ProfileFragment"
-        android:label="ProfileFragment"
-        tools:layout="@layout/profile_fragment"/>
-    <fragment
-        android:id="@+id/navigation_recipes"
-        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.recipes.RecipesFragment"
-        android:label="RecipesFragment"
-        tools:layout="@layout/recipes_fragment"/>
+    <include app:graph = "@navigation/navigation_categories"/>
 
-    <fragment
-        android:id="@+id/sales_fragment"
-        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.sales.SalesFragment"
-        android:label="SalesFragment"
-        tools:layout="@layout/sales_fragment">
-        <argument
-            android:name="categoryName"
-            app:argType="ru.freeezzzi.coursework.onlinestore.domain.models.Category" />
-    </fragment>
+    <include app:graph = "@navigation/navigation_recipes"/>
 
+    <include app:graph = "@navigation/navigation_cart"/>
+
+    <include app:graph = "@navigation/navigation_profile"/>
 </navigation>

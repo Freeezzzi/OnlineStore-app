@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_home"
+    app:startDestination="@+id/home_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_home_to_sales"
+            app:destination="@id/sales_fragment">
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/sales_fragment"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.sales.SalesFragment"
+        android:label="SalesFragment"
+        tools:layout="@layout/sales_fragment">
+        <argument
+            android:name="categoryName"
+            app:argType="ru.freeezzzi.coursework.onlinestore.domain.models.Category" />
+    </fragment>
+
+</navigation>

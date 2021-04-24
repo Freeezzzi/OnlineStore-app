@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
-abstract class BaseFragment(layoutResource: Int) : Fragment(layoutResource) {
+abstract class BaseFragment(private val layoutResource: Int) : Fragment(layoutResource) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -15,8 +15,6 @@ abstract class BaseFragment(layoutResource: Int) : Fragment(layoutResource) {
     }
 
     open fun initViews(view: View) {}
-
-    open fun onBackPressed() {}
 
     open fun showError(msg: String, view: View) {
         var errorMsg = msg
