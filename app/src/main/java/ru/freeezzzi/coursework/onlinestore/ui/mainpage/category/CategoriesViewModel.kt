@@ -19,14 +19,40 @@ class CategoriesViewModel @Inject constructor(
     val categoriesList: LiveData<ViewState<List<Category>, String?>>
         get() = mutableCategoriesList
 
+    private var fullList: List<Category> = mutableListOf()
+
+    fun searchAction(query: String) {
+        val list = mutableListOf<Category>()
+        fullList.forEach {
+            if (it.title.contains(query, true)) list.add(it)
+        }
+        mutableCategoriesList.value = ViewState.success(list)
+    }
+
+    fun clearSearchAction() {
+        mutableCategoriesList.value = ViewState.success(fullList)
+    }
+
     fun getCategories() {
         viewModelScope.launch {
+            val nestedCategory = mutableListOf<Category>()
+            nestedCategory.add(Category(4, "onion", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif", mutableListOf()))
             val list: List<Category> = mutableListOf(
-                Category(0, "fruits", "https://miro.medium.com/max/468/1*Aq99R6jM608RgF_663kmAA.png"),
-                Category(1, "vegetables", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif"),
-                Category(2, "meat", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif"),
-                Category(3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif")
+                Category(
+                    0, "fruits", "https://miro.medium.com/max/468/1*Aq99R6jM608RgF_663kmAA.png",
+                    mutableListOf()
+                ),
+                Category(1, "vegetables", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif", nestedCategory),
+                Category(
+                    2, "meat", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    mutableListOf()
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    mutableListOf()
+                )
             )
+            fullList = list
             mutableCategoriesList.value = ViewState.success(list)
             /*mutableCategoriesList.value = ViewState.loading()
             when (val result = categoriesRepository.getCategories()) {

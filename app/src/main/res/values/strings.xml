@@ -7,4 +7,5 @@
     <string name="menu_profile">Profile</string>
     <string name="shared_pref_name">User data preferences</string>
     <string name="search_label">Search</string>
+    <string name="all">All</string>
 </resources>
