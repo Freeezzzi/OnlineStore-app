@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/white_grey">
 
         <HorizontalScrollView
             android:id="@+id/sales_fragment_scrollview"
@@ -63,5 +64,9 @@
             app:layout_constraintTop_toBottomOf="@id/sales_fragment_label" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/sales_bottom_sheet"
+        layout="@layout/product_bottom_sheet"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

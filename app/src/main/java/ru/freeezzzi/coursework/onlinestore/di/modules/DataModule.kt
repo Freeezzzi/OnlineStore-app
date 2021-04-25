@@ -19,4 +19,8 @@ internal abstract class DataModule {
     @Binds
     @Singleton
     abstract fun provideCategoriesRepository(categoriesRepositoryImpl: CategoriesRepositoryImpl): CategoriesRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideProductsRepository(productsRepositoryImpl: ProductsRepositoryImpl): ProductsRepository
 }

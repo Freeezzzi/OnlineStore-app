@@ -35,21 +35,50 @@ class CategoriesViewModel @Inject constructor(
 
     fun getCategories() {
         viewModelScope.launch {
-            val nestedCategory = mutableListOf<Category>()
-            nestedCategory.add(Category(4, "onion", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif", mutableListOf()))
             val list: List<Category> = mutableListOf(
                 Category(
                     0, "fruits", "https://miro.medium.com/max/468/1*Aq99R6jM608RgF_663kmAA.png",
-                    mutableListOf()
+                    ""
                 ),
-                Category(1, "vegetables", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif", nestedCategory),
+                Category(
+                    1, "vegetables", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    "fruits;vegetables;onion"
+                ),
                 Category(
                     2, "meat", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
-                    mutableListOf()
+                    ""
                 ),
                 Category(
                     3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
-                    mutableListOf()
+                    ""
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    ""
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    ""
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    ""
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    ""
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    ""
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    ""
+                ),
+                Category(
+                    3, "cupcakes", "https://miro.medium.com/max/700/1*qtCaJ3SscNBGVuKEHfl7Rw.gif",
+                    ""
                 )
             )
             fullList = list

@@ -20,7 +20,7 @@ class PrefsStorage @Inject constructor(
     fun observeUser(): LiveData<User?> = userLiveData
 
     fun loadUser(): User? {
-        val username = sharedPref.getString(USERNAME_KEY, null)
+        /*val username = sharedPref.getString(USERNAME_KEY, null)
         val name = sharedPref.getString(NAME_KEY, null)
         val token = sharedPref.getString(TOKEN_KEY, null)
 
@@ -29,7 +29,7 @@ class PrefsStorage @Inject constructor(
                 username = username,
                 name = name,
                 token = token,
-            )
+            )*/
 
         return null
     }
@@ -37,7 +37,7 @@ class PrefsStorage @Inject constructor(
     fun saveToSharedPref(
         user: User?
     ) {
-        if (user != null) {
+        /*if (user != null) {
             sharedPref.edit()
                 .putString(USERNAME_KEY, user.username)
                 .putString(NAME_KEY, user.name)
@@ -49,7 +49,7 @@ class PrefsStorage @Inject constructor(
                 .remove(NAME_KEY)
                 .remove(TOKEN_KEY)
                 .apply()
-        }
+        }*/
         userLiveData.postValue(user)
     }
 

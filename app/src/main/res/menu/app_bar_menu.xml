@@ -14,12 +14,12 @@
         android:id="@+id/navigation_recipes"
         android:menuCategory="secondary"
         android:icon="@drawable/ic_launcher_background"
-        android:title="@string/menu_cart"/>
+        android:title="@string/menu_recipes"/>
     <item
         android:id="@+id/navigation_cart"
         android:menuCategory="secondary"
         android:icon="@drawable/ic_launcher_background"
-        android:title="@string/menu_recipes"/>
+        android:title="@string/menu_cart"/>
     <item
         android:id="@+id/navigation_profile"
         android:menuCategory="secondary"

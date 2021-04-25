@@ -7,5 +7,6 @@ data class User(
     var phone: String,
     var email: String,
     val token: String,
+    var balance: Long,
     var address: Address?
 )

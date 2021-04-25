@@ -8,4 +8,6 @@
     <string name="shared_pref_name">User data preferences</string>
     <string name="search_label">Search</string>
     <string name="all">All</string>
+    <string name="recently_watched">Recently watched</string>
+    <string name="on_sale">On Sale</string>
 </resources>

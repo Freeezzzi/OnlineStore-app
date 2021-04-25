@@ -10,5 +10,5 @@ data class Product(
     val bought: Long,
     val country: String,
     val brand: String,
-    val onSale: Boolean
+    val onSale: Boolean,
 )

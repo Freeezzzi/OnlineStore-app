@@ -8,6 +8,7 @@ import ru.freeezzzi.coursework.onlinestore.di.modules.AppModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.DataModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.NetworkModule
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesRepository
+import ru.freeezzzi.coursework.onlinestore.domain.repositories.ProductsRepository
 import ru.freeezzzi.coursework.onlinestore.ui.MainActivity
 import javax.inject.Named
 import javax.inject.Singleton
@@ -18,6 +19,8 @@ interface AppComponent {
     // fun provideRouter(): Router
 
     fun provideCategoriesRepository(): CategoriesRepository
+
+    fun provideProductsRepository(): ProductsRepository
 
     fun inject(app: App)
 
