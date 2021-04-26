@@ -10,4 +10,18 @@
     <string name="all">All</string>
     <string name="recently_watched">Recently watched</string>
     <string name="on_sale">On Sale</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="delivery_fee">Delivery fee:</string>
+    <string name="free">Free</string>
+    <string name="total">Total:</string>
+    <string name="checkout">Checkout</string>
+    <string name="you_have_n_items">"You have %1d items"</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="delivery_time">Delivery Date &amp; Time</string>
+    <string name="products">Products</string>
+    <string name="apply_coupon">Apply coupon</string>
+    <string name="coupon">Coupon:</string>
+    <string name="proceed_to_payment">Proceed to payment</string>
 </resources>

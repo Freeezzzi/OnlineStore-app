@@ -47,6 +47,21 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
             // chipClickListener((it as TextView).text.toString()) }
             val bts = BottomSheetBehavior.from(binding.salesBottomSheet.productBottomSheetRoot)
             bts.state = BottomSheetBehavior.STATE_EXPANDED
+            bts.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                        binding.bg.setVisibility(View.GONE)
+                        binding.salesIncluded.bgToolbar.visibility = View.GONE
+                    }
+                }
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    binding.bg.visibility = View.VISIBLE
+                    binding.bg.alpha = slideOffset
+                    binding.salesIncluded.bgToolbar.visibility = View.VISIBLE
+                    binding.salesIncluded.bgToolbar.alpha = slideOffset
+                }
+            })
         }
         binding.salesFragmentChipgroup.addView(chip)
         val list = args.categoryName.relatedCategories.split(";")
