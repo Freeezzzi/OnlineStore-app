@@ -55,6 +55,7 @@ class RegisterViewHolder(
         binding.signUpPhoneCard.fieldCardText.inputType = InputType.TYPE_CLASS_PHONE
         binding.signUpPasswordCard.fieldCardText.hint = binding.root.context.getString(R.string.password)
         binding.signUpPasswordCard.fieldCardText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+        binding.signUpPasswordCard.fieldCardNextButton.setOnClickListener { it.clearFocus() }
     }
 
     private fun setUpPhoneValidation() {
@@ -90,10 +91,10 @@ class RegisterViewHolder(
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (p0?.length ?: 0 > 0 && isEmail(p0.toString())) { // Ввод закончен
-                    binding.signUpPhoneCard.fieldCardChecked.visibility = View.VISIBLE
+                if (p0?.length ?: 0 > 0 && isEmail(p0.toString().trim())) { // Ввод закончен
+                    binding.signUpEmailCard.fieldCardChecked.visibility = View.VISIBLE
                 } else {
-                    binding.signUpPhoneCard.fieldCardChecked.visibility = View.INVISIBLE
+                    binding.signUpEmailCard.fieldCardChecked.visibility = View.INVISIBLE
                 }
             }
         })
@@ -108,6 +109,9 @@ class RegisterViewHolder(
             override fun afterTextChanged(p0: Editable?) {
                 if (p0?.length ?: 0 > 0 && !p0!!.toString().isBlank()) {
                     cardBinding.fieldCardNextButton.visibility = View.VISIBLE
+                }
+                if (p0?.length ?: 0 == 0) {
+                    cardBinding.fieldCardNextButton.visibility = View.GONE
                 }
             }
         })

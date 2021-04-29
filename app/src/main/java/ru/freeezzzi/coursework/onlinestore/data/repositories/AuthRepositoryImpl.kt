@@ -13,7 +13,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val serverApi: ServerAPI
 ) : AuthRepository {
 
-
     override fun loadUser(): User? = prefsStorage.loadUser()
 
     override fun observeUser(): LiveData<User?> = prefsStorage.observeUser()
@@ -33,11 +32,9 @@ class AuthRepositoryImpl @Inject constructor(
             prefsStorage.saveToSharedPref(user)*/
 
             OperationResult.Success(Unit)
-
         } catch (e: Exception) {
             OperationResult.Error(e.message)
         }
-
 
     override suspend fun register(
         username: String,
@@ -56,11 +53,9 @@ class AuthRepositoryImpl @Inject constructor(
             prefsStorage.saveToSharedPref(user)*/
 
             OperationResult.Success(Unit)
-
         } catch (e: Exception) {
             OperationResult.Error(e.message)
         }
-
 
     override fun logOut() =
         prefsStorage.saveToSharedPref(null)

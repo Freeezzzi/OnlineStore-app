@@ -11,6 +11,9 @@ import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesRepository
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.ProductsRepository
 import ru.freeezzzi.coursework.onlinestore.ui.MainActivity
+import ru.freeezzzi.coursework.onlinestore.ui.SplashActivity
+import ru.freeezzzi.coursework.onlinestore.ui.loginregistration.LoginActivity
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutActivity
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -27,7 +30,13 @@ interface AppComponent {
 
     fun inject(app: App)
 
+    fun inject(appActivity: SplashActivity)
+
     fun inject(appActivity: MainActivity)
+
+    fun inject(appActivity: LoginActivity)
+
+    fun inject(appActivity: CheckoutActivity)
 
     @Component.Builder
     interface Builder {
