@@ -64,7 +64,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
             })
         }
         binding.salesFragmentChipgroup.addView(chip)
-        val list = args.categoryName.relatedCategories.split(";")
+        /*val list = args.categoryName.relatedCategories.split(";")
         val set = list.toMutableSet()
         for (item in set) {
             val chip = Chip(context)
@@ -75,7 +75,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
                 // chipClickListener((it as TextView).text.toString()) }
             }
             binding.salesFragmentChipgroup.addView(chip)
-        }
+        }*/
     }
 }
 

@@ -24,4 +24,14 @@
     <string name="apply_coupon">Apply coupon</string>
     <string name="coupon">Coupon:</string>
     <string name="proceed_to_payment">Proceed to payment</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">Log in</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone number</string>
+    <string name="name">Name</string>
+    <string name="Password">Password</string>
+    <string name="enter_email_or_phone_number">Please enter your email or phone number</string>
+    <string name="enter_email_and_phone_number">Please enter your email and phone number</string>
+    <string name="email_or_phone">Email or phone</string>
+    <string name="password">Password</string>
 </resources>
