@@ -7,9 +7,17 @@ import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesReposit
 import javax.inject.Inject
 
 class CategoriesRepositoryImpl @Inject constructor(
-    private val serverAPI: ServerAPI
+    private val serverAPI: ServerAPI,
+    private val authRepositoryImpl: AuthRepositoryImpl
 ) : CategoriesRepository {
-    override suspend fun getCategories(): OperationResult<List<Category>, String?> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCategories(): OperationResult<List<Category>, String?> =
+        try {
+            val categories = serverAPI.getAllCategories(authRepositoryImpl.loadUser()!!.token).map {
+                it.toCategory()
+            }
+
+            OperationResult.Success(categories)
+        } catch (e: Throwable) {
+            OperationResult.Error(e.message)
+        }
 }

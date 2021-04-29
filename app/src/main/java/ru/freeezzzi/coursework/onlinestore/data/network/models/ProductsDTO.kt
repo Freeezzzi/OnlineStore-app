@@ -1,6 +1,7 @@
 package ru.freeezzzi.coursework.onlinestore.data.network.models
 
 import com.squareup.moshi.JsonClass
+import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 
 @JsonClass(generateAdapter = true)
 data class ProductsDTO(
@@ -14,4 +15,17 @@ data class ProductsDTO(
     val country: String,
     val brand: String,
     val onSale: Boolean,
-)
+){
+    fun toProduct(): Product = Product(
+        id = id,
+        title = title,
+        category = category.toCategory(),
+        price = price,
+        amount = amount,
+        imageUrl = imageUrl,
+        bought = bought,
+        country = country,
+        brand = brand,
+        onSale = onSale
+    )
+}

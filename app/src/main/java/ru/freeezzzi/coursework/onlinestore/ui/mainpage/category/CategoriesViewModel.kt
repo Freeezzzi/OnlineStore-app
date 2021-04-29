@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.freeezzzi.coursework.onlinestore.domain.OperationResult
 import ru.freeezzzi.coursework.onlinestore.domain.models.Category
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesRepository
 import ru.freeezzzi.coursework.onlinestore.ui.ViewState
@@ -35,7 +36,22 @@ class CategoriesViewModel @Inject constructor(
 
     fun getCategories() {
         viewModelScope.launch {
-            val list: List<Category> = mutableListOf(
+            mutableCategoriesList.value = ViewState.loading()
+            when (val result = categoriesRepository.getCategories()) {
+                is OperationResult.Success -> {
+                    fullList = result.data
+                    mutableCategoriesList.value = ViewState.success(result.data)
+                }
+                is OperationResult.Error -> {
+                    mutableCategoriesList.value = ViewState.error(fullList, result.data)
+                }
+            }
+        }
+    }
+}
+
+/*
+val list: List<Category> = mutableListOf(
                 Category(
                     0, "fruits", "https://miro.medium.com/max/468/1*Aq99R6jM608RgF_663kmAA.png"
                 ),
@@ -72,15 +88,4 @@ class CategoriesViewModel @Inject constructor(
             )
             fullList = list
             mutableCategoriesList.value = ViewState.success(list)
-            /*mutableCategoriesList.value = ViewState.loading()
-            when (val result = categoriesRepository.getCategories()) {
-                is OperationResult.Success -> {
-                    mutableCategoriesList.value = ViewState.success(result.data)
-                }
-                is OperationResult.Error -> {
-                    mutableCategoriesList.value = ViewState.error(listOf(), result.data)
-                }
-            }*/
-        }
-    }
-}
+ */
