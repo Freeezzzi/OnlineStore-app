@@ -10,8 +10,10 @@ interface AuthRepository {
     suspend fun login(username: String, password: String): OperationResult<Unit, String?>
 
     suspend fun register(
-        username: String,
         name: String,
+        pwd: String,
+        phone: String,
+        email: String
     ): OperationResult<Unit, String?>
 
     fun observeUser(): LiveData<User?>

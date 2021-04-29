@@ -3,6 +3,9 @@ package ru.freeezzzi.coursework.onlinestore.data.repositories
 import androidx.lifecycle.LiveData
 import ru.freeezzzi.coursework.onlinestore.data.PrefsStorage
 import ru.freeezzzi.coursework.onlinestore.data.network.ServerAPI
+import ru.freeezzzi.coursework.onlinestore.data.network.models.LoginRequestDTO
+import ru.freeezzzi.coursework.onlinestore.data.network.models.RegisterRequestDTO
+import ru.freeezzzi.coursework.onlinestore.data.network.models.toUser
 import ru.freeezzzi.coursework.onlinestore.domain.OperationResult
 import ru.freeezzzi.coursework.onlinestore.domain.models.User
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
@@ -22,14 +25,14 @@ class AuthRepositoryImpl @Inject constructor(
         password: String
     ): OperationResult<Unit, String?> =
         try {
-            /*val user = serverApi.login(
+            val user = serverApi.login(
                 LoginRequestDTO(
                     username = username,
                     pwd = password
                 )
             ).toUser()
 
-            prefsStorage.saveToSharedPref(user)*/
+            prefsStorage.saveToSharedPref(user)
 
             OperationResult.Success(Unit)
         } catch (e: Exception) {
@@ -37,20 +40,22 @@ class AuthRepositoryImpl @Inject constructor(
         }
 
     override suspend fun register(
-        username: String,
-        name: String
+        name: String,
+        pwd: String,
+        phone: String,
+        email: String,
     ): OperationResult<Unit, String?> =
         try {
-            /*val user = serverApi.register(
+            val user = serverApi.register(
                 RegisterRequestDTO(
-                    username = username,
-                    pwd = password,
+                    pwd = pwd,
                     name = name,
-                    isMentor = isMentor
+                    email = email,
+                    phone = phone
                 )
             ).toUser()
 
-            prefsStorage.saveToSharedPref(user)*/
+            prefsStorage.saveToSharedPref(user)
 
             OperationResult.Success(Unit)
         } catch (e: Exception) {

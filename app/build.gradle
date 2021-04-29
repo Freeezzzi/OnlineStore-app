@@ -29,17 +29,7 @@ android {
             buildConfigField(
                     "String",
                     "BASE_URL",
-                    "\"https://finnhub.io/api/v1/\""
-            )
-            buildConfigField(
-                    "String",
-                    "API_KEY",
-                    "\"c192c5n48v6rd7oudn20\""
-            )
-            buildConfigField(
-                    "String",
-                    "TICKERS_KEY",
-                    "\"^GSPC\""
+                    "\"https://onlinestore-backend-5layf3pf6q-ew.a.run.app\""
             )
         }
         release {

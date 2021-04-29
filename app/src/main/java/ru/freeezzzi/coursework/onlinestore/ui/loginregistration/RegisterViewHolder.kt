@@ -3,6 +3,7 @@ package ru.freeezzzi.coursework.onlinestore.ui.loginregistration
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import android.view.View
 import androidx.core.view.isVisible
@@ -26,7 +27,8 @@ class RegisterViewHolder(
         setUpTextChangeListener(binding.signUpNameCard)
         setUpEmailValidation()
         setUpPhoneValidation()
-        setUpTextChangeListener(binding.signUpPasswordCard)
+        setUpPasswordField()
+        // setUpTextChangeListener(binding.signUpPasswordCard)
         binding.signUpButton.setOnClickListener {
             if (validateFields()) {
                 registerCallback.invoke(
@@ -43,7 +45,7 @@ class RegisterViewHolder(
         binding.signUpNameCard.fieldCardChecked.isVisible &&
             binding.signUpEmailCard.fieldCardChecked.isVisible &&
             binding.signUpPhoneCard.fieldCardChecked.isVisible &&
-            binding.signUpPasswordCard.fieldCardChecked.isVisible
+            binding.signUpPasswordCard.fieldCardText.text.isNotBlank()
 
     /**
      * UI SETUP
@@ -54,8 +56,8 @@ class RegisterViewHolder(
         binding.signUpPhoneCard.fieldCardText.hint = binding.root.context.getString(R.string.phone_number)
         binding.signUpPhoneCard.fieldCardText.inputType = InputType.TYPE_CLASS_PHONE
         binding.signUpPasswordCard.fieldCardText.hint = binding.root.context.getString(R.string.password)
-        binding.signUpPasswordCard.fieldCardText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-        binding.signUpPasswordCard.fieldCardNextButton.setOnClickListener { it.clearFocus() }
+        binding.signUpPasswordCard.fieldCardText.transformationMethod = PasswordTransformationMethod()
+        binding.signUpPasswordCard.fieldCardNextButton.setOnClickListener { binding.signUpPasswordCard.fieldCardText.clearFocus() }
     }
 
     private fun setUpPhoneValidation() {
@@ -132,6 +134,16 @@ class RegisterViewHolder(
             val next = it.focusSearch(View.FOCUS_DOWN)
             if (next != null) next.requestFocus()
         }
+    }
+
+    private fun setUpPasswordField() {
+        binding.signUpPasswordCard.fieldCardText.setOnFocusChangeListener(object : View.OnFocusChangeListener {
+            override fun onFocusChange(p0: View?, p1: Boolean) {
+                if (binding.signUpPasswordCard.fieldCardText.text.isNotBlank()) {
+                    binding.signUpPasswordCard.fieldCardChecked.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
     private fun isEmail(text: String) = !text.isBlank() && Patterns.EMAIL_ADDRESS.matcher(text).matches()
