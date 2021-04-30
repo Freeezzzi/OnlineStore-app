@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
+import android.text.method.SingleLineTransformationMethod
 import android.util.Patterns
 import android.view.View
 import androidx.core.view.isVisible
@@ -137,13 +138,26 @@ class RegisterViewHolder(
     }
 
     private fun setUpPasswordField() {
-        binding.signUpPasswordCard.fieldCardText.setOnFocusChangeListener(object : View.OnFocusChangeListener {
+/*        binding.signUpPasswordCard.fieldCardText.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(p0: View?, p1: Boolean) {
                 if (binding.signUpPasswordCard.fieldCardText.text.isNotBlank()) {
                     binding.signUpPasswordCard.fieldCardChecked.visibility = View.VISIBLE
                 }
             }
-        })
+        })*/
+        binding.signUpPasswordCard.fieldVisibility.visibility = View.VISIBLE
+        binding.signUpPasswordCard.fieldVisibility.setOnClickListener {
+            binding.signUpPasswordCard.fieldCardText.transformationMethod = SingleLineTransformationMethod()
+            it.visibility = View.INVISIBLE
+            binding.signUpPasswordCard.fieldVisibilityOff.visibility = View.VISIBLE
+            binding.signUpPasswordCard.fieldCardText.setSelection(binding.signUpPasswordCard.fieldCardText.text.toString().length)
+        }
+        binding.signUpPasswordCard.fieldVisibilityOff.setOnClickListener {
+            binding.signUpPasswordCard.fieldCardText.transformationMethod = PasswordTransformationMethod()
+            it.visibility = View.INVISIBLE
+            binding.signUpPasswordCard.fieldVisibility.visibility = View.VISIBLE
+            binding.signUpPasswordCard.fieldCardText.setSelection(binding.signUpPasswordCard.fieldCardText.text.toString().length)
+        }
     }
 
     private fun isEmail(text: String) = !text.isBlank() && Patterns.EMAIL_ADDRESS.matcher(text).matches()
