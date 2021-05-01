@@ -15,6 +15,7 @@ data class ProductsDTO(
     val country: String,
     val brand: String,
     val onSale: Boolean,
+    val weight: String
 ){
     fun toProduct(): Product = Product(
         id = id,
@@ -26,6 +27,7 @@ data class ProductsDTO(
         bought = bought,
         country = country,
         brand = brand,
-        onSale = onSale
+        onSale = onSale,
+            weight = weight
     )
 }

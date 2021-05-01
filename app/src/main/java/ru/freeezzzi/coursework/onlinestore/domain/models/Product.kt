@@ -11,4 +11,5 @@ data class Product(
     val country: String,
     val brand: String,
     val onSale: Boolean,
+    val weight: String
 )

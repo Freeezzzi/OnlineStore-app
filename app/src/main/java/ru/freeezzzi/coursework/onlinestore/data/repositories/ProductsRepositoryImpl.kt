@@ -13,7 +13,7 @@ class ProductsRepositoryImpl @Inject constructor(
 
     override suspend fun getProductsByCategory(categoryId: Long): OperationResult<List<Product>, String?> =
         try {
-            val products = serverAPI.getProductsByCategory(authRepositoryImpl.loadUser()!!.token,categoryId).map {
+            val products = serverAPI.getProductsByCategory(authRepositoryImpl.loadUser()!!.token, categoryId).map {
                 it.toProduct()
             }
 
