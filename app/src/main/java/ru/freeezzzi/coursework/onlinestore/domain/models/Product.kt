@@ -11,5 +11,17 @@ data class Product(
     val country: String,
     val brand: String,
     val onSale: Boolean,
-    val weight: String
-)
+    val weight: String,
+    // only local field
+    var countInCart: Int
+) {
+    override fun equals(other: Any?): Boolean {
+        if (other == null) return false
+        if (other !is Product) return false
+        return (other.id ?: 0).equals(id)
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+}

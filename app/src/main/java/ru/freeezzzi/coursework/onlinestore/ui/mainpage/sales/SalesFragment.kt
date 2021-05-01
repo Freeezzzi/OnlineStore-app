@@ -19,6 +19,8 @@ import ru.freeezzzi.coursework.onlinestore.di.viewmodels.DaggerSalesViewModelCom
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.ViewState
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModelFactory
 import ru.freeezzzi.coursework.onlinestore.ui.toPrice
 
 class SalesFragment : BaseFragment(R.layout.sales_fragment) {
@@ -28,11 +30,17 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
     private val args: SalesFragmentArgs by navArgs()
 
     private val listAdapter = SalesListAdapter(
-        itemOnClickAction = ::productClicked
+        itemOnClickAction = ::productClicked,
+        addItemAction = { cartViewModel.addOneItem(it) },
+        removeItemAction = { cartViewModel.removeOneItem(it) }
     )
 
     private val viewModel: SalesViewModel by viewModels(
         factoryProducer = { SalesViewModelFactory() }
+    )
+
+    private val cartViewModel: CartViewModel by viewModels(
+        factoryProducer = { CartViewModelFactory() }
     )
 
     override fun initViews(view: View) {
@@ -50,6 +58,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
         binding.salesFragmentLabel.text = args.categoryName.title // TODO менять в зависимости от категории
         viewModel.productsList.observe(viewLifecycleOwner, ::productsChanged)
         viewModel.getProductsByCategory(args.categoryName.id)
+        cartViewModel.initilizeCart()
 
         // bootm sheet dialog
         val bts = BottomSheetBehavior.from(binding.salesBottomSheet.productBottomSheetRoot)
@@ -59,8 +68,8 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
     private fun productsChanged(newValue: ViewState<List<Product>, String?>) {
         when (newValue) {
             is ViewState.Success -> {
+                newValue.result.forEach { cartViewModel.isInCart(it) }
                 listAdapter.submitList(newValue.result.toMutableList())
-                listAdapter.itemCount
                 fillChipGroup()
             }
             // is ViewState.Loading -> //TODO загрузка
@@ -80,15 +89,38 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
             it.productSheetCountryValue.text = product.country
             it.productSheetBrandValue.text = product.brand
             it.productSheetAmountValue.text = product.amount.toString()
+            setUpAddToCartButtonBTD(product)
+
+            it.bottomSheetInclude.also {
+                // Нажатие на левую сторону кнопки
+                it.addButtonLeftside.setOnClickListener {
+                    if (product.countInCart > 0) {
+                        cartViewModel.removeOneItem(product)
+                        setUpAddToCartButtonBTD(product)
+                        listAdapter.notifyDataSetChanged()
+                    } else {
+                        cartViewModel.addOneItem(product)
+                        setUpAddToCartButtonBTD(product)
+                        listAdapter.notifyDataSetChanged()
+                    }
+                }
+                // нажатие на правую сторону кнопки
+                it.addButtonRightSide.setOnClickListener {
+                    cartViewModel.addOneItem(product)
+                    setUpAddToCartButtonBTD(product)
+                    listAdapter.notifyDataSetChanged()
+                }
+            }
         }
 
-        val bts = BottomSheetBehavior.from(binding.salesBottomSheet.productBottomSheetRoot)
-        bts.state = BottomSheetBehavior.STATE_EXPANDED
-        bts.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        val btd = BottomSheetBehavior.from(binding.salesBottomSheet.productBottomSheetRoot)
+        btd.state = BottomSheetBehavior.STATE_EXPANDED
+        btd.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     binding.bg.setVisibility(View.GONE)
                     binding.salesIncluded.bgToolbar.visibility = View.GONE
+                    listAdapter.notifyDataSetChanged()
                 }
             }
 
@@ -99,6 +131,27 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
                 binding.salesIncluded.bgToolbar.alpha = slideOffset
             }
         })
+    }
+
+    fun setUpAddToCartButtonBTD(product: Product) {
+        if (product.countInCart > 0) {
+            binding.salesBottomSheet.bottomSheetInclude.also {
+                it.addToCartButtonAdd.visibility = View.VISIBLE
+                it.addToCartButtonDelete.visibility = View.VISIBLE
+                it.addToCartButtonCount.visibility = View.VISIBLE
+                it.addToCartButtonLabel.visibility = View.INVISIBLE
+                it.imageView4.visibility = View.INVISIBLE
+                it.addToCartButtonCount.text = product.countInCart.toString()
+            }
+        } else {
+            binding.salesBottomSheet.bottomSheetInclude.also {
+                it.addToCartButtonAdd.visibility = View.INVISIBLE
+                it.addToCartButtonDelete.visibility = View.INVISIBLE
+                it.addToCartButtonCount.visibility = View.INVISIBLE
+                it.addToCartButtonLabel.visibility = View.VISIBLE
+                it.imageView4.visibility = View.VISIBLE
+            }
+        }
     }
 
     /**

@@ -22,7 +22,7 @@ class SalesViewModel @Inject constructor(
 
     private var fullList: List<Product> = mutableListOf()
 
-    fun getProductsByCategory(categoryId:Long){
+    fun getProductsByCategory(categoryId: Long) {
         viewModelScope.launch {
             mutableProductsList.value = ViewState.loading()
             when (val result = productsRepository.getProductsByCategory(categoryId)) {
@@ -36,5 +36,4 @@ class SalesViewModel @Inject constructor(
             }
         }
     }
-
 }

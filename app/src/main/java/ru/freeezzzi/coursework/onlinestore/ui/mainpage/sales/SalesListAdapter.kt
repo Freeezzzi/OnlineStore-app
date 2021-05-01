@@ -8,7 +8,9 @@ import ru.freeezzzi.coursework.onlinestore.databinding.ProductItemGridBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 
 class SalesListAdapter(
-    private val itemOnClickAction: (Product) -> Unit
+    private val itemOnClickAction: (Product) -> Unit,
+    private val addItemAction: (Product) -> Unit,
+    private val removeItemAction: (Product) -> Unit
 ) : ListAdapter<Product, SalesItemViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesItemViewHolder {
@@ -18,7 +20,12 @@ class SalesListAdapter(
     }
 
     override fun onBindViewHolder(holder: SalesItemViewHolder, position: Int) {
-        holder.onBind(getItem(position), itemOnClickAction)
+        holder.onBind(
+            product = getItem(position),
+            itemOnClickAction = itemOnClickAction,
+            addItemAction = addItemAction,
+            removeItemAction = removeItemAction
+        )
     }
 
     companion object {
@@ -27,7 +34,7 @@ class SalesListAdapter(
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
-                oldItem == newItem
+                oldItem == newItem && oldItem.countInCart == newItem.countInCart
         }
     }
 }

@@ -28,6 +28,7 @@ data class ProductsDTO(
         country = country,
         brand = brand,
         onSale = onSale,
-            weight = weight
+            weight = weight,
+            countInCart = 0
     )
 }
