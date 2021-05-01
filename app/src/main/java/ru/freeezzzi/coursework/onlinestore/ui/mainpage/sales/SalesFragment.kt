@@ -2,6 +2,7 @@ package ru.freeezzzi.coursework.onlinestore.ui.mainpage.sales
 
 import android.view.View
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -39,9 +40,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
         factoryProducer = { SalesViewModelFactory() }
     )
 
-    private val cartViewModel: CartViewModel by viewModels(
-        factoryProducer = { CartViewModelFactory() }
-    )
+    private val cartViewModel: CartViewModel by activityViewModels()
 
     override fun initViews(view: View) {
         super.initViews(view)
@@ -58,7 +57,6 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
         binding.salesFragmentLabel.text = args.categoryName.title // TODO менять в зависимости от категории
         viewModel.productsList.observe(viewLifecycleOwner, ::productsChanged)
         viewModel.getProductsByCategory(args.categoryName.id)
-        cartViewModel.initilizeCart()
 
         // bootm sheet dialog
         val bts = BottomSheetBehavior.from(binding.salesBottomSheet.productBottomSheetRoot)
@@ -198,7 +196,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
     }
 }
 
-private class SalesViewModelFactory() : ViewModelProvider.Factory {
+private class SalesViewModelFactory : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return DaggerSalesViewModelComponent.builder()

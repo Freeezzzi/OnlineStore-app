@@ -16,10 +16,8 @@ class CartViewModel @Inject constructor(
     val cartList: LiveData<List<Product>>
         get() = mutableCartList
 
-    fun initilizeCart() {
-        if (mutableCartList.value == null) {
-            mutableCartList.value = listOf()
-        }
+    fun initializeCart() {
+        mutableCartList.value = listOf()
     }
 
     /**
