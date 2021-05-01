@@ -34,4 +34,7 @@
     <string name="enter_email_and_phone_number">Please enter your email and phone number</string>
     <string name="email_or_phone">Email or phone</string>
     <string name="password">Password</string>
+    <string name="country">Country:</string>
+    <string name="brand">Brand:</string>
+    <string name="left_on_stock">Remain in stock:</string>
 </resources>

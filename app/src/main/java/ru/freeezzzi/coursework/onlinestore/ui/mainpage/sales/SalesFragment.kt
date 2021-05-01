@@ -77,6 +77,9 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
             it.productSheetLabel.text = product.title
             it.productSheetPrice.text = product.price.toPrice()
             it.productSheetWeight.text = product.weight
+            it.productSheetCountryValue.text = product.country
+            it.productSheetBrandValue.text = product.brand
+            it.productSheetAmountValue.text = product.amount.toString()
         }
 
         val bts = BottomSheetBehavior.from(binding.salesBottomSheet.productBottomSheetRoot)

@@ -24,8 +24,8 @@ class SalesItemViewHolder(
     private fun fillData(product: Product) {
         setPicture(product)
         binding.gridItemName.text = product.title
-        binding.gridItemPrice.text = product.price
-        binding.gridItemWeight.text = product.weight// TODO Добавить вес продукта
+        binding.gridItemPrice.text = product.price.toPrice()
+        binding.gridItemWeight.text = product.weight
     }
 
     private fun setPicture(product: Product) {
