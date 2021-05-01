@@ -60,8 +60,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="@string/you_have_n_items"
                 android:textColor="@color/black_custom"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,6 +74,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="12dp"
                 android:text="@string/delete_all"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,8 +82,10 @@
                 android:id="@+id/cart_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cart_itemcount" />
 
@@ -92,6 +97,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/subtotal"
                 android:textColor="@color/black_custom"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cart_recyclerview" />
 
@@ -103,7 +109,7 @@
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cart_recyclerview" />
@@ -116,6 +122,7 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/delivery_fee"
                 android:textColor="@color/black_custom"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cart_subtotal" />
 
@@ -127,11 +134,13 @@
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cart_subtotal" />
 
             <View
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
@@ -150,10 +159,10 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/total"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart_deliveryfee" />
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <TextView
                 android:id="@+id/cart_total_value"
@@ -163,23 +172,25 @@
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart_deliveryfee" />
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <Button
                 android:id="@+id/cart_checkout_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_corners_right"
                 android:text="@string/checkout"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cart_total" />

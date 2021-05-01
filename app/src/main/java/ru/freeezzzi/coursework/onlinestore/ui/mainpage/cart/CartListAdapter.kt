@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import ru.freeezzzi.coursework.onlinestore.databinding.CartListItemBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 
-class CartListAdapter() : ListAdapter<Product, CartItemViewHolder>(DIFF_CALLBACK) {
+class CartListAdapter(
+    private val itemOnClickAction: (Product) -> Unit,
+    private val addItemAction: (Product) -> Unit,
+    private val removeItemAction: (Product) -> Unit
+) : ListAdapter<Product, CartItemViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = CartListItemBinding.inflate(layoutInflater, parent, false)
@@ -15,7 +19,12 @@ class CartListAdapter() : ListAdapter<Product, CartItemViewHolder>(DIFF_CALLBACK
     }
 
     override fun onBindViewHolder(holder: CartItemViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        holder.onBind(
+            product = getItem(position),
+            itemOnClickAction = itemOnClickAction,
+            addItemAction = addItemAction,
+            removeItemAction = removeItemAction
+        )
     }
 
     companion object {

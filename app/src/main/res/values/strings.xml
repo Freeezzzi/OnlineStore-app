@@ -12,7 +12,7 @@
     <string name="on_sale">On Sale</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="subtotal">Subtotal:</string>
-    <string name="delivery_fee">Delivery fee:</string>
+    <string name="delivery_fee">Delivery fee(free from 700₽):</string>
     <string name="free">Free</string>
     <string name="total">Total:</string>
     <string name="checkout">Checkout</string>

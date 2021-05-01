@@ -1,9 +1,7 @@
 package ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart
 
-import android.content.Context
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,29 +12,57 @@ import ru.freeezzzi.coursework.onlinestore.databinding.CartFragmentBinding
 import ru.freeezzzi.coursework.onlinestore.di.viewmodels.DaggerCartViewModelComponent
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
-import ru.freeezzzi.coursework.onlinestore.ui.MainActivity
-import javax.inject.Inject
+import ru.freeezzzi.coursework.onlinestore.ui.toPrice
 
 class CartFragment : BaseFragment(R.layout.cart_fragment) {
 
     private val binding by viewBinding(CartFragmentBinding::bind)
 
-    private val viewModel: CartViewModel by activityViewModels()
+    private val cartViewModel: CartViewModel by activityViewModels()
 
-    private val listAdapter = CartListAdapter()
+    private val listAdapter = CartListAdapter(
+        itemOnClickAction = ::productClicked,
+        addItemAction = { cartViewModel.addOneItem(it) },
+        removeItemAction = { cartViewModel.removeOneItem(it) }
+    )
 
     override fun initViews(view: View) {
         super.initViews(view)
 
+        setUpUi()
+
         binding.cartRecyclerview.adapter = listAdapter
         binding.cartRecyclerview.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.cartList.observe(viewLifecycleOwner, ::cartListChanged)
+        cartViewModel.cartList.observe(viewLifecycleOwner, ::cartListChanged)
     }
 
     fun cartListChanged(newValue: List<Product>) {
         listAdapter.submitList(newValue)
-        // TODO Обновлять счетчик
+        // TODO Обновлять счетчик внутри фрагмента(обновить сумму, кол-во предметов)
+        var subtotal = 0
+        var itemCount = 0
+        newValue.forEach {
+            subtotal += it.price.toInt() * it.countInCart
+            itemCount += it.countInCart
+        }
+        val deliveryfee = if (subtotal >= 700) 0 else 200
+
+        binding.cartSubtotalValue.text = subtotal.toString().toPrice()
+        binding.cartDeliveryfeeValue.text = deliveryfee.toString().toPrice()
+        binding.cartItemcount.text = String.format(getString(R.string.you_have_n_items), itemCount)
+        binding.cartTotalValue.text = (subtotal + deliveryfee).toString().toPrice()
+    }
+
+    private fun productClicked(product: Product) {
+        // TODO открывать BTD
+    }
+
+    private fun setUpUi() {
+        binding.cartDeleteall.setOnClickListener { cartViewModel.initializeCart() }
+        binding.cartCheckoutButton.setOnClickListener {
+            // TODO checkout
+        }
     }
 }
 
