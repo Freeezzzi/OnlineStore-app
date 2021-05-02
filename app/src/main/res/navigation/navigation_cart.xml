@@ -9,6 +9,33 @@
         android:id="@+id/cart_fragment"
         android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/cart_fragment"/>
+        tools:layout="@layout/cart_fragment">
+        <action
+            android:id="@+id/action_open_checkout_activity"
+            app:destination="@id/checkoutActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/checkoutActivity"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutActivity"
+        android:label="CheckoutActivity"
+        tools:layout="@layout/checkout_activity">
+        <argument
+            android:name="Products"
+            app:argType="ru.freeezzzi.coursework.onlinestore.domain.models.Product[]" />
+    </activity>
+
+    <!--<navigation
+        android:id="@+id/navigation_checkout"
+        app:startDestination="@id/checkoutFragment">
+
+        <fragment
+            android:id="@+id/checkoutFragment"
+            android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutFragment"
+            android:label="CheckoutFragment"
+            tools:layout="@layout/checkout_fragment" />
+
+
+    </navigation>-->
 
 </navigation>

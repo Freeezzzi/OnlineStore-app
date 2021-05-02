@@ -1,14 +1,13 @@
 package ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart
 
 import android.view.View
-import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.squareup.picasso.Picasso
 import ru.freeezzzi.coursework.onlinestore.App
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.databinding.CartFragmentBinding
@@ -58,7 +57,7 @@ class CartFragment : BaseFragment(R.layout.cart_fragment) {
     }
 
     private fun productClicked(product: Product) {
-       binding.cartBottomSheet.productSheetImage.setPicture(product.imageUrl)
+        binding.cartBottomSheet.productSheetImage.setPicture(product.imageUrl)
         binding.cartBottomSheet.also {
             it.productSheetLabel.text = product.title
             it.productSheetPrice.text = product.price.toPrice()
@@ -134,7 +133,10 @@ class CartFragment : BaseFragment(R.layout.cart_fragment) {
     private fun setUpUi() {
         binding.cartDeleteall.setOnClickListener { cartViewModel.initializeCart() }
         binding.cartCheckoutButton.setOnClickListener {
-            // TODO checkout
+            if (cartViewModel.cartList.value?.size != 0) { // TODO переделать и добавить картинку для пустой корзины
+                val action = CartFragmentDirections.actionOpenCheckoutActivity((cartViewModel.cartList.value ?: mutableListOf()).toTypedArray())
+                Navigation.findNavController(binding.root).navigate(action)
+            }
         }
     }
 }

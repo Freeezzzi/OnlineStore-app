@@ -9,6 +9,7 @@ import ru.freeezzzi.coursework.onlinestore.di.scopes.AppScope
 import ru.freeezzzi.coursework.onlinestore.di.scopes.ViewModelKey
 import ru.freeezzzi.coursework.onlinestore.di.viewmodels.ViewModelFactory
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutViewModel
 
 @Module()
 abstract class ViewModelFactoryModule {
@@ -20,5 +21,10 @@ abstract class ViewModelFactoryModule {
     @IntoMap
     @ViewModelKey(CartViewModel::class)
     abstract fun bindCartViewModel(cartViewModel: CartViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CheckoutViewModel::class)
+    abstract fun bindCheckoutViewModel(checkoutViewModel: CheckoutViewModel): ViewModel
 
 }

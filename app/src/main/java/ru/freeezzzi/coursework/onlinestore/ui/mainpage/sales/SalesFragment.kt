@@ -55,7 +55,6 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
         binding.salesIncluded.salesToolbarArrowback.setOnClickListener {
             Navigation.findNavController(binding.root).navigateUp()
         }
-        binding.salesFragmentLabel.text = args.categoryName.title // TODO менять в зависимости от категории
         viewModel.productsList.observe(viewLifecycleOwner, ::productsChanged)
         viewModel.getProductsByCategory(args.categoryName.id)
 
