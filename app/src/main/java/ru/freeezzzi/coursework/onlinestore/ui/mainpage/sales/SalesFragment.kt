@@ -1,7 +1,6 @@
 package ru.freeezzzi.coursework.onlinestore.ui.mainpage.sales
 
 import android.view.View
-import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
-import com.squareup.picasso.Picasso
 import ru.freeezzzi.coursework.onlinestore.App
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.databinding.SalesFragmentBinding
@@ -21,7 +19,6 @@ import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.ViewState
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
-import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModelFactory
 import ru.freeezzzi.coursework.onlinestore.ui.setPicture
 import ru.freeezzzi.coursework.onlinestore.ui.toPrice
 
@@ -46,6 +43,8 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
     override fun initViews(view: View) {
         super.initViews(view)
 
+        binding.salesSwipeRefreshLayout.setOnRefreshListener { viewModel.getProductsByCategory(args.categoryName.id) }
+
         // recyclerview
         binding.salesFragmentRecyclerview.adapter = listAdapter
         binding.salesFragmentRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -68,10 +67,14 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
             is ViewState.Success -> {
                 newValue.result.forEach { cartViewModel.isInCart(it) }
                 listAdapter.submitList(newValue.result.toMutableList())
+                binding.salesSwipeRefreshLayout.isRefreshing = false
                 fillChipGroup()
             }
-            // is ViewState.Loading -> //TODO загрузка
-            // is ViewState.Error -> //TODO вывести ошибку
+            is ViewState.Loading -> binding.salesSwipeRefreshLayout.isRefreshing = true
+            is ViewState.Error -> {
+                // TODO вывести ошибку
+                binding.salesSwipeRefreshLayout.isRefreshing = false
+            }
         }
     }
 
@@ -156,6 +159,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
      *  UI
      */
     fun fillChipGroup() {
+        // TODO clear chips
         val chip = Chip(context)
         chip.setChipBackgroundColorResource(R.color.white)
         chip.setEnsureMinTouchTargetSize(false)

@@ -35,6 +35,7 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
         val layoutManager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = listAdapter
+        binding.categoriesRefreshLayout.setOnRefreshListener { viewModel.getCategories() }
 
         viewModel.getCategories()
 
@@ -43,8 +44,15 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
     private fun categoriesChanged(newValue: ViewState<List<Category>, String?>) {
         when (newValue) {
-            is ViewState.Success -> listAdapter.submitList(newValue.result)
-            // is ViewState.Error -> //TODO вывести ошибку
+            is ViewState.Success -> {
+                listAdapter.submitList(newValue.result)
+                binding.categoriesRefreshLayout.isRefreshing = false
+            }
+            is ViewState.Loading -> binding.categoriesRefreshLayout.isRefreshing = true
+            is ViewState.Error -> {
+                // TODO вывести ошибку
+                binding.categoriesRefreshLayout.isRefreshing = false
+            }
         }
     }
 
