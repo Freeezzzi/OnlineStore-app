@@ -9,6 +9,7 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.databinding.CategoryListItemBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Category
+import ru.freeezzzi.coursework.onlinestore.ui.setPicture
 
 class CategoriesItemViewHolder(
     private val binding: CategoryListItemBinding
@@ -22,27 +23,10 @@ class CategoriesItemViewHolder(
     }
     fun bind(item: Category) {
         binding.categoryItemLabel.text = item.title
-        setPicture(item)
+        binding.categoryItemImage.setPicture(item.imageUrl)
         val action = CategoriesFragmentDirections.actionOpenSalesFromCategory(item)
         binding.root.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(action)
-        }
-    }
-
-    private fun setPicture(category: Category) {
-        if (category.imageUrl.isEmpty()) {
-            binding.categoryItemImage.setImageResource(R.color.white)
-        } else {
-            Picasso.get().isLoggingEnabled = true
-            Picasso.get()
-                .load(category.imageUrl)
-                .placeholder(R.color.white)
-                .error(R.color.white)
-                .transform(transformation)
-                .fit()
-                .centerInside()
-                // .centerCrop()
-                .into(binding.categoryItemImage)
         }
     }
 }

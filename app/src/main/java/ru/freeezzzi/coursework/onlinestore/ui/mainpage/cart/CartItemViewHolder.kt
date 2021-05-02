@@ -6,6 +6,7 @@ import com.squareup.picasso.Picasso
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.databinding.CartListItemBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
+import ru.freeezzzi.coursework.onlinestore.ui.setPicture
 import ru.freeezzzi.coursework.onlinestore.ui.toPrice
 
 class CartItemViewHolder(
@@ -19,7 +20,6 @@ class CartItemViewHolder(
         addItemAction: (Product) -> Unit,
         removeItemAction: (Product) -> Unit
     ){
-        setPicture(product)
         thisProduct = product
         fillData(thisProduct!!)
         binding.root.setOnClickListener {
@@ -36,27 +36,10 @@ class CartItemViewHolder(
     }
 
     private fun fillData(product: Product) {
-        setPicture(product)
+        binding.cartListImage.setPicture(product.imageUrl)
         binding.cartListLabel.text = product.title
         binding.cartListPrice.text = product.price.toPrice()
         binding.cartListWeight.text = product.weight
         binding.cartListCount.text = thisProduct!!.countInCart.toString()
-    }
-
-    private fun setPicture(product: Product) {
-        if (product.imageUrl.isEmpty()) {
-            binding.cartListImage.setImageResource(R.color.white)
-        } else {
-            Picasso.get().isLoggingEnabled = true
-            Picasso.get()
-                .load(product.imageUrl)
-                .placeholder(R.color.white)
-                .error(R.color.white)
-                // .transform(transformation)
-                .fit()
-                .centerInside()
-                // .centerCrop()
-                .into(binding.cartListImage)
-        }
     }
 }

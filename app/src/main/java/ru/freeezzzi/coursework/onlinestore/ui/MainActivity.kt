@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setBadge(itemsCount: Int) {
         val badge = binding.bottomNaviagationView.getOrCreateBadge(R.id.navigation_cart)
+        badge.maxCharacterCount = 3
         badge.backgroundColor = applicationContext.resources.getColor(R.color.red)
         if (itemsCount == 0) {
             badge.isVisible = false

@@ -25,6 +25,8 @@ class CartViewModel @Inject constructor(
      */
     fun addOneItem(product: Product) {
         val cart = mutableCartList.value!!.toMutableList()
+        if(product.countInCart + 1 > product.amount) return //если на складе больше нет
+
         val it = cart.find {
             it.equals(product)
         }

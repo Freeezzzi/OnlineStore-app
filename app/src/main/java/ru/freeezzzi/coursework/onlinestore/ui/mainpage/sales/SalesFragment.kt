@@ -22,6 +22,7 @@ import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.ViewState
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModelFactory
+import ru.freeezzzi.coursework.onlinestore.ui.setPicture
 import ru.freeezzzi.coursework.onlinestore.ui.toPrice
 
 class SalesFragment : BaseFragment(R.layout.sales_fragment) {
@@ -79,7 +80,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
      * Заполняется и открывается Bottom sheet dialog
      */
     private fun productClicked(product: Product) {
-        setPicture(product, binding.salesBottomSheet.productSheetImage)
+        binding.salesBottomSheet.productSheetImage.setPicture(product.imageUrl)
         binding.salesBottomSheet.also {
             it.productSheetLabel.text = product.title
             it.productSheetPrice.text = product.price.toPrice()
@@ -176,23 +177,6 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
             }
             binding.salesFragmentChipgroup.addView(chip)
         }*/
-    }
-
-    private fun setPicture(product: Product, imageView: ImageView) {
-        if (product.imageUrl.isEmpty()) {
-            imageView.setImageResource(R.color.white)
-        } else {
-            Picasso.get().isLoggingEnabled = true
-            Picasso.get()
-                .load(product.imageUrl)
-                .placeholder(R.color.white)
-                .error(R.color.white)
-                // .transform(transformation)
-                .fit()
-                .centerInside()
-                // .centerCrop()
-                .into(imageView)
-        }
     }
 }
 
