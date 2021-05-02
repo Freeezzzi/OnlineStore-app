@@ -16,6 +16,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:background="@color/white_grey">
 
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
@@ -101,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="time"
+                    android:text="@string/select_delivery_time"
                     android:textColor="@color/black_custom"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -340,5 +341,24 @@
             app:layout_constraintTop_toBottomOf="@+id/checkout_deliveryfee" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/bg_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/dim_color"
+        android:visibility="invisible" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="8dp">
+
+        <include
+            android:id="@+id/date_time_bottom_sheet"
+            layout="@layout/delivery_date_time_bottom_sheet" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -13,12 +13,24 @@
         tools:layout="@layout/checkout_fragment" >
         <action
             android:id="@+id/action_checkoutFragment_to_editAddressFragment"
-            app:destination="@id/editAddressFragment" />
+            app:destination="@id/editAddressFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/editAddressFragment"
         android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.editaddress.EditAddressFragment"
         android:label="EditAddressFragment"
         tools:layout="@layout/edit_address"/>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/payment_fragment"/>
 
 </navigation>

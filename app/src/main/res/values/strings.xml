@@ -46,4 +46,12 @@
     <string name="entrance">Entrance</string>
     <string name="floor">Floor</string>
     <string name="edit_address">Edit address</string>
+    <string name="select_date">Select date:</string>
+    <string name="select_time">Select time:</string>
+    <string name="select_delivery_time">Select delivery time</string>
+    <string name="select_payment_method">Select payment method</string>
+    <string name="payment_method_balance">Balance %1d</string>
+    <string name="confirm_pay">Confirm &amp; pay</string>
+    <string name="credit_debit_card">Credit/Debit Card</string>
+    <string name="order_in_total">Order in total</string>
 </resources>

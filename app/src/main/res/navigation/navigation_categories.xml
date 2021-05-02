@@ -12,8 +12,9 @@
         tools:layout="@layout/categories_fragment">
         <action
             android:id="@+id/action_open_sales_from_category"
-            app:destination="@+id/sales_fragment"
-            />
+            app:destination="@id/sales_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
