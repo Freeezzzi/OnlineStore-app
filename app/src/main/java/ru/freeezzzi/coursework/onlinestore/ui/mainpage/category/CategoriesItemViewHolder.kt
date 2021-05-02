@@ -1,9 +1,7 @@
 package ru.freeezzzi.coursework.onlinestore.ui.mainpage.category
 
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import ru.freeezzzi.coursework.onlinestore.R

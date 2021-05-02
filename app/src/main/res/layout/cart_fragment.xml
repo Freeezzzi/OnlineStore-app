@@ -70,11 +70,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/you_have_n_items"
                     android:textColor="@color/black_custom"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,10 +82,10 @@
                     android:id="@+id/cart_deleteall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:text="@string/delete_all"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,9 +106,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="@string/subtotal"
                     android:textColor="@color/black_custom"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cart_recyclerview" />
 
@@ -118,6 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="TextView"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -131,9 +133,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="@string/delivery_fee"
                     android:textColor="@color/black_custom"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cart_subtotal" />
 
@@ -143,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="TextView"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -168,6 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-black"
                     android:text="@string/total"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -181,6 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-black"
                     android:text="TextView"
                     android:textColor="@color/black"
                     android:textSize="18sp"

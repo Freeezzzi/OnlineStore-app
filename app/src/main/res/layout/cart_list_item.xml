@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="3dp"
     app:cardCornerRadius="@dimen/rounded_corner_rad"
-    app:cardElevation="0dp"
-    android:layout_margin="8dp">
+    app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-black"
             android:text="TextView"
             android:textColor="@color/dim_color"
@@ -40,10 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-black"
             android:text="TextView"
-            android:textColor="@color/grey"
+            android:textColor="@color/gray"
             app:layout_constraintStart_toEndOf="@+id/cart_list_image"
             app:layout_constraintTop_toBottomOf="@+id/cart_list_label" />
 
@@ -52,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-black"
             android:text="TextView"
             android:textColor="@color/black_custom"
@@ -63,7 +62,7 @@
         <ImageButton
             android:id="@+id/cart_list_add"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:background="@drawable/rounded_corners_left"
             android:backgroundTint="@color/pale_orange"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +72,7 @@
         <ImageButton
             android:id="@+id/cart_list_remove"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:background="@drawable/rounded_corners_right"
             android:backgroundTint="@color/pale_orange"
             app:layout_constraintBottom_toBottomOf="parent"

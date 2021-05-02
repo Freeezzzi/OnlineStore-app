@@ -10,6 +10,15 @@
         android:id="@+id/checkoutFragment"
         android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutFragment"
         android:label="CheckoutFragment"
-        tools:layout="@layout/checkout_fragment" />
+        tools:layout="@layout/checkout_fragment" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_editAddressFragment"
+            app:destination="@id/editAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAddressFragment"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.editaddress.EditAddressFragment"
+        android:label="EditAddressFragment"
+        tools:layout="@layout/edit_address"/>
 
 </navigation>

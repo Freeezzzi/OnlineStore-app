@@ -19,4 +19,6 @@ interface AuthRepository {
     fun observeUser(): LiveData<User?>
 
     fun logOut()
+
+    fun saveUser(user: User)
 }

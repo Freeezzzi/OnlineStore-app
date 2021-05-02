@@ -64,4 +64,8 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun logOut() =
         prefsStorage.saveToSharedPref(null)
+
+    override fun saveUser(user: User) {
+        prefsStorage.saveToSharedPref(user)
+    }
 }

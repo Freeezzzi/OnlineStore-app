@@ -1,11 +1,10 @@
 package ru.freeezzzi.coursework.onlinestore.domain.models
 
 data class Address(
-    var country : String,
-    var state : String,
-    var city: String,
-    var street : String,
-    var houseNum : String,
-    var apartNum : String
-) {
-}
+    val name: String,
+    val phone: String,
+    val streetAndHouse: String,
+    val apart: String,
+    val entrance: String,
+    val floor: String
+)
