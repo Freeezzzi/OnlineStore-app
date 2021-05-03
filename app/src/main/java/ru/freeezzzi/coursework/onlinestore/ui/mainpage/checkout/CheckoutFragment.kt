@@ -3,13 +3,17 @@ package ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.selection.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import okhttp3.internal.immutableListOf
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.databinding.CheckoutFragmentBinding
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.toPrice
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
     private val binding: CheckoutFragmentBinding by viewBinding(CheckoutFragmentBinding::bind)
@@ -17,6 +21,18 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
     private val viewModel: CheckoutViewModel by activityViewModels()
 
     private val listAdapter = CheckoutListAdapter()
+
+    private val timeListAdapter = TimePickerListAdapter()
+    private var timeListTracker: SelectionTracker<Long>? = null
+
+    private val dateListAdapter = DatePickerListAdapter()
+    private var dateListTracker: SelectionTracker<Long>? = null
+
+    private val deliveryTime = immutableListOf<String>(
+        "11:00-15:00",
+        "15:00-19:00",
+        "19:00-21:00"
+    )
 
     override fun initViews(view: View) {
         super.initViews(view)
@@ -27,6 +43,55 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
         setUpValues()
         setUpClickListeners()
         listAdapter.submitList(viewModel.productsList)
+
+        // BTD
+        binding.dateTimeBottomSheet.timeRecyclerView.adapter = timeListAdapter
+        binding.dateTimeBottomSheet.timeRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        timeListTracker = SelectionTracker.Builder<Long>(
+            "time_picking",
+            binding.dateTimeBottomSheet.timeRecyclerView,
+            StableIdKeyProvider(binding.dateTimeBottomSheet.timeRecyclerView),
+            TimeDetailsLookup(binding.dateTimeBottomSheet.timeRecyclerView),
+            StorageStrategy.createLongStorage()
+        ).withSelectionPredicate(
+            SelectionPredicates.createSelectSingleAnything() // Можно переопределить и самому настроить поведение(вернуть true - можно выбрать, false - нельзя)
+        ).build()
+        timeListTracker?.addObserver(
+            object : SelectionTracker.SelectionObserver<Long>() {
+                override fun onSelectionChanged() {
+                    super.onSelectionChanged()
+                    if (!timeListTracker!!.selection.isEmpty) {
+                        viewModel.deliveryTime = timeListAdapter.currentList[timeListTracker!!.selection.elementAt(0).toInt()]
+                    }
+                }
+            }
+        )
+        timeListAdapter.tracker = timeListTracker
+        timeListAdapter.submitList(deliveryTime)
+
+        binding.dateTimeBottomSheet.dateRecyclerView.adapter = dateListAdapter
+        binding.dateTimeBottomSheet.dateRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        dateListTracker = SelectionTracker.Builder<Long>(
+            "date_picking",
+            binding.dateTimeBottomSheet.dateRecyclerView,
+            StableIdKeyProvider(binding.dateTimeBottomSheet.dateRecyclerView),
+            DateDetailsLookup(binding.dateTimeBottomSheet.dateRecyclerView),
+            StorageStrategy.createLongStorage()
+        ).withSelectionPredicate(
+            SelectionPredicates.createSelectSingleAnything() // Можно переопределить и самому настроить поведение(вернуть true - можно выбрать, false - нельзя)
+        ).build()
+        dateListTracker?.addObserver(
+            object : SelectionTracker.SelectionObserver<Long>() {
+                override fun onSelectionChanged() {
+                    super.onSelectionChanged()
+                    if (!dateListTracker!!.selection.isEmpty) {
+                        viewModel.deliveryDate = dateListAdapter.currentList[dateListTracker!!.selection.elementAt(0).toInt()]
+                    }
+                }
+            }
+        )
+        dateListAdapter.tracker = dateListTracker
+        dateListAdapter.submitList(getDeliveryDatesList())
     }
 
     fun setUpValues() {
@@ -59,8 +124,15 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
             openBTD()
         }
         binding.checkoutCheckoutButton.setOnClickListener {
-            val action = CheckoutFragmentDirections.actionCheckoutFragmentToPaymentFragment()
-            Navigation.findNavController(binding.root).navigate(action)
+            if (viewModel.deliveryTime.isNotBlank() &&
+                viewModel.deliveryDate.isNotBlank() &&
+                viewModel.user.address != null
+            ) {
+                val action = CheckoutFragmentDirections.actionCheckoutFragmentToPaymentFragment()
+                Navigation.findNavController(binding.root).navigate(action)
+            } else {
+                // TODO show error
+            }
         }
     }
 
@@ -87,5 +159,20 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
             // TODO save date and time
             btd.state = BottomSheetBehavior.STATE_COLLAPSED
         }
+    }
+
+    fun getDeliveryDatesList(): List<String> {
+        val dates = mutableListOf<String>()
+        var time = Calendar.getInstance().timeInMillis
+        for (i in 0 until 7) {
+            val formatted = SimpleDateFormat("E dd MMM").format(time)
+            dates.add(formatted)
+            time += ONE_DAY
+        }
+        return dates
+    }
+
+    companion object {
+        const val ONE_DAY = 1000L * 60 * 60 * 24
     }
 }

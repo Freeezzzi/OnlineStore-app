@@ -11,8 +11,8 @@ import ru.freeezzzi.coursework.onlinestore.di.modules.DataModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.NetworkModule
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesRepository
+import ru.freeezzzi.coursework.onlinestore.domain.repositories.OrdersRepository
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.ProductsRepository
-import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.MainActivity
 import ru.freeezzzi.coursework.onlinestore.ui.SplashActivity
 import ru.freeezzzi.coursework.onlinestore.ui.loginregistration.LoginActivity
@@ -31,6 +31,8 @@ interface AppComponent {
     fun provideProductsRepository(): ProductsRepository
 
     fun provideAuthRepository(): AuthRepository
+
+    fun provideOrdersRepository(): OrdersRepository
 
     fun inject(app: App)
 

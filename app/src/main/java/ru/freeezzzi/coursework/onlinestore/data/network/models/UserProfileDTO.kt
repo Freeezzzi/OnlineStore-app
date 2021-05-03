@@ -4,6 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class UserProfileDTO(
+    val id: Long,
     val pwd: String,
     val email: String,
     val name: String,

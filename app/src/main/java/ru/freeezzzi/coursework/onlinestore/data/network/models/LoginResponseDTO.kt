@@ -11,6 +11,7 @@ data class LoginResponseDTO(
 
 fun LoginResponseDTO.toUser(): User =
     User(
+        id = userProfile.id,
         name = userProfile.name,
         pwd = userProfile.pwd,
         email = userProfile.email,

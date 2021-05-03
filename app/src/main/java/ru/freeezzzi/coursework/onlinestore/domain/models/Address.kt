@@ -7,4 +7,8 @@ data class Address(
     val apart: String,
     val entrance: String,
     val floor: String
-)
+) {
+    override fun toString(): String {
+        return "$name $phone $streetAndHouse $apart entr. $entrance floor $floor"
+    }
+}

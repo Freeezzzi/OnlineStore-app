@@ -38,4 +38,22 @@ interface ServerAPI {
     suspend fun getProductsOnSale(
         @Query("Token")token: String
     ): List<ProductsDTO>
+
+    @POST("orders/place")
+    suspend fun placeOrder(
+        @Query("Token")token: String,
+        @Body ordersDTO: OrdersDTO
+    ): Boolean
+
+    @GET("orders/by_id")
+    suspend fun findOrdersForUser(
+        @Query("Token")token: String,
+        @Query(value = "user_id") userId: Long
+    ): List<OrdersDTO>
+
+    @GET("products/by_ids")
+    suspend fun getProductsByIds(
+        @Query("Token")token: String,
+        @Query(value = "productIds") productIds: List<Long>
+    ): List<ProductsDTO>
 }

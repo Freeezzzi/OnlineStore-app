@@ -21,6 +21,7 @@ class PrefsStorage @Inject constructor(
     fun observeUser(): LiveData<User?> = userLiveData
 
     fun loadUser(): User? {
+        val id = sharedPref.getLong(ID_KEY, -1)
         val pwd = sharedPref.getString(PASSWORD_KEY, null)
         val name = sharedPref.getString(NAME_KEY, null)
         val token = sharedPref.getString(TOKEN_KEY, null)
@@ -34,29 +35,30 @@ class PrefsStorage @Inject constructor(
         val entrance = sharedPref.getString(ENTRANCE_KEY, "")
         val floor = sharedPref.getString(FLOOR_KEY, "")
 
-        if (!pwd.isNullOrBlank() && !name.isNullOrBlank() && !token.isNullOrBlank() &&
+        if (id != -1L && !pwd.isNullOrBlank() && !name.isNullOrBlank() && !token.isNullOrBlank() &&
             !email.isNullOrBlank() && !phone.isNullOrBlank() && balance != -1L
         ) {
             var address: Address? = null
             if (!addressName.isNullOrBlank() && !addressPhone.isNullOrBlank() && !streetAndHouse.isNullOrBlank()) {
                 address = Address(
-                        name = addressName,
-                        phone = addressPhone,
-                        streetAndHouse = streetAndHouse,
-                        apart = apart?: "",
-                        entrance = entrance?: "",
-                        floor = floor?: ""
+                    name = addressName,
+                    phone = addressPhone,
+                    streetAndHouse = streetAndHouse,
+                    apart = apart ?: "",
+                    entrance = entrance ?: "",
+                    floor = floor ?: ""
 
                 )
             }
             return User(
-                    pwd = pwd,
-                    name = name,
-                    token = token,
-                    email = email,
-                    phone = phone,
-                    balance = balance,
-                    address = address
+                id = id,
+                pwd = pwd,
+                name = name,
+                token = token,
+                email = email,
+                phone = phone,
+                balance = balance,
+                address = address
             )
         }
 
@@ -68,6 +70,7 @@ class PrefsStorage @Inject constructor(
     ) {
         if (user != null) {
             sharedPref.edit()
+                .putLong(ID_KEY, user.id)
                 .putString(PASSWORD_KEY, user.pwd)
                 .putString(NAME_KEY, user.name)
                 .putString(TOKEN_KEY, user.token)
@@ -87,6 +90,7 @@ class PrefsStorage @Inject constructor(
             }
         } else {
             sharedPref.edit()
+                .remove(ID_KEY)
                 .remove(PASSWORD_KEY)
                 .remove(NAME_KEY)
                 .remove(TOKEN_KEY)
@@ -105,6 +109,7 @@ class PrefsStorage @Inject constructor(
     }
 
     companion object {
+        private const val ID_KEY = "id"
         private const val PASSWORD_KEY = "username"
         private const val NAME_KEY = "name"
         private const val PHONE_KEY = "phone"
