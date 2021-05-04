@@ -24,7 +24,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
     override fun initViews(view: View) {
         super.initViews(view)
 
-        binding.logOutButton.setOnClickListener {
+        binding.signOutCard.setOnClickListener {
             viewModel.logOut()
             val intent = Intent(context, SplashActivity::class.java)
             startActivity(intent)

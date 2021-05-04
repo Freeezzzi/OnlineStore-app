@@ -57,4 +57,12 @@
     <string name="payment">Payment</string>
     <string name="choose_address">Choose address</string>
     <string name="default_address_type">Home</string>
+    <string name="orders">Orders</string>
+    <string name="placed">Placed</string>
+    <string name="preparing">Preparing</string>
+    <string name="on_the_way">On the way</string>
+    <string name="delivered">Delivered</string>
+    <string name="view_all">View all</string>
+    <string name="coupons">Coupons</string>
+    <string name="sign_out">Sign out</string>
 </resources>
