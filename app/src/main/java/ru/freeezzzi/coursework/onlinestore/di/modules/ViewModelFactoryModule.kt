@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.freeezzzi.coursework.onlinestore.di.scopes.AppScope
 import ru.freeezzzi.coursework.onlinestore.di.scopes.ViewModelKey
 import ru.freeezzzi.coursework.onlinestore.di.viewmodels.ViewModelFactory
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.ProfileViewModel
 
 @Module()
 abstract class ViewModelFactoryModule {
@@ -27,4 +27,8 @@ abstract class ViewModelFactoryModule {
     @ViewModelKey(CheckoutViewModel::class)
     abstract fun bindCheckoutViewModel(checkoutViewModel: CheckoutViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
 }

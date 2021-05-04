@@ -12,6 +12,7 @@ import ru.freeezzzi.coursework.onlinestore.databinding.ActivityMainBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.ProfileViewModel
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val cartViewModel: CartViewModel by viewModels { viewModelFactory }
+
+    private val profileViewModel: ProfileViewModel by viewModels { viewModelFactory }
 
     private var bottomNavManager: BottomNavManager? = null
 
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         cartViewModel.initializeCart()
         cartViewModel.cartList.observe(this, ::cartChanged)
+        profileViewModel.user
     }
 
     fun cartChanged(newValue: List<Product>) {

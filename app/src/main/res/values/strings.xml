@@ -65,4 +65,8 @@
     <string name="view_all">View all</string>
     <string name="coupons">Coupons</string>
     <string name="sign_out">Sign out</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="new_password">New password</string>
+    <string name="orders_count">%1d orders</string>
 </resources>

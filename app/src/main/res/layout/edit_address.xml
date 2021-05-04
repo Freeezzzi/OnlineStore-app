@@ -61,14 +61,16 @@
 
                     <EditText
                         android:id="@+id/edit_address_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@null"
                         android:ems="10"
                         android:hint="@string/name"
                         android:inputType="textPersonName"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -96,16 +98,18 @@
 
                     <EditText
                         android:id="@+id/edit_address_phone"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="8dp"
                         android:background="@null"
                         android:ems="10"
                         android:hint="@string/phone_number"
                         android:inputType="phone"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView11" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -151,14 +155,16 @@
 
                     <EditText
                         android:id="@+id/edit_address_street"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@null"
                         android:ems="10"
                         android:hint="@string/street_house_num"
                         android:inputType="textPersonName"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -186,14 +192,16 @@
 
                     <EditText
                         android:id="@+id/edit_address_flatnum"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@null"
                         android:ems="10"
                         android:hint="@string/apartament_number"
                         android:inputType="phone"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -221,14 +229,16 @@
 
                     <EditText
                         android:id="@+id/edit_address_entrance_num"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@null"
                         android:ems="10"
                         android:hint="@string/entrance"
                         android:inputType="phone"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -256,16 +266,18 @@
 
                     <EditText
                         android:id="@+id/edit_address_floor"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="8dp"
                         android:background="@null"
                         android:ems="10"
                         android:hint="@string/floor"
                         android:inputType="phone"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView15" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,4 +16,12 @@
     <color name="white_grey">#FAFAFA</color>
     <color name="pale_orange">#FFF4D2</color>
     <color name="gray1">#20111111</color>
+    <color name="dark_orange">#F8D8A6</color>
+    <color name="stroke_dark_orange">#F18D78</color>
+    <color name="yellow">#FFF4D2</color>
+    <color name="stroke_yellow">#FBDA6F</color>
+    <color name="blue">#D7EAFC</color>
+    <color name="stroke_blue">#9DC7ED</color>
+    <color name="green">#D3EDD0</color>
+    <color name="stroke_green">#87C984</color>
 </resources>

@@ -50,7 +50,7 @@ class CheckoutViewModel @Inject constructor(
             val order = Order(
                 id = 0,
                 user_id = user.id,
-                status = "Placed",
+                status = Order.STATUS_PLACED,
                 products = productsList as ArrayList<Product>,
                 address = user.address.toString(),
                 orderTime = orderTime,

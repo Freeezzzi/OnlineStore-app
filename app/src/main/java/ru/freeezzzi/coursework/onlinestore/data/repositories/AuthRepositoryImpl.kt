@@ -5,6 +5,7 @@ import ru.freeezzzi.coursework.onlinestore.data.PrefsStorage
 import ru.freeezzzi.coursework.onlinestore.data.network.ServerAPI
 import ru.freeezzzi.coursework.onlinestore.data.network.models.LoginRequestDTO
 import ru.freeezzzi.coursework.onlinestore.data.network.models.RegisterRequestDTO
+import ru.freeezzzi.coursework.onlinestore.data.network.models.fromUser
 import ru.freeezzzi.coursework.onlinestore.data.network.models.toUser
 import ru.freeezzzi.coursework.onlinestore.domain.OperationResult
 import ru.freeezzzi.coursework.onlinestore.domain.models.User
@@ -68,4 +69,21 @@ class AuthRepositoryImpl @Inject constructor(
     override fun saveUser(user: User) {
         prefsStorage.saveToSharedPref(user)
     }
+
+    override suspend fun updateUserOnServer(user: User): OperationResult<Boolean, String?> =
+            try {
+                val result = serverApi.updateUser(
+                        token = user.token,
+                        userProfileDTO = fromUser(user)
+                )
+
+                prefsStorage.saveToSharedPref(user)
+
+                OperationResult.Success(result)
+            } catch (e: Exception) {
+                OperationResult.Error(e.message)
+            }
+
+
+
 }

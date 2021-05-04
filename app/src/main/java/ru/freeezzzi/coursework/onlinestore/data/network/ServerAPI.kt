@@ -56,4 +56,10 @@ interface ServerAPI {
         @Query("Token")token: String,
         @Query(value = "productIds") productIds: List<Long>
     ): List<ProductsDTO>
+
+    @POST("updateUser")
+    suspend fun updateUser(
+        @Query("Token")token: String,
+        @Body userProfileDTO: UserProfileDTO
+    ): Boolean
 }

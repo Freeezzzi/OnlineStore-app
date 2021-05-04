@@ -21,4 +21,6 @@ interface AuthRepository {
     fun logOut()
 
     fun saveUser(user: User)
+
+    suspend fun updateUserOnServer(user: User): OperationResult<Boolean, String?>
 }

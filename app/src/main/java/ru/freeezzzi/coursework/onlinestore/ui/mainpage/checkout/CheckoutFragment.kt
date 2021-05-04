@@ -46,6 +46,7 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
 
         setUpAddressCard()
         setUpValues()
+        setUpDateAndTime()
         setUpClickListeners()
         listAdapter.submitList(viewModel.productsList)
 
@@ -158,6 +159,12 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
             it.addressCardLabel.text = getString(R.string.default_address_type)
             it.addressCartAddress.text = viewModel.user.address!!.toStringWithoutPhoneAndName()
             it.addressCartName.text = viewModel.user.address!!.toStringPhoneName()
+        }
+    }
+
+    fun setUpDateAndTime(){
+        if (viewModel.deliveryDate.isNotBlank() && viewModel.deliveryTime.isNotBlank()){
+            binding.checkoutTimeCardTitle.text = viewModel.deliveryDate + " " + viewModel.deliveryTime
         }
     }
 
