@@ -55,4 +55,6 @@
     <string name="credit_debit_card">Credit/Debit Card</string>
     <string name="order_in_total">Order in total</string>
     <string name="payment">Payment</string>
+    <string name="choose_address">Choose address</string>
+    <string name="default_address_type">Home</string>
 </resources>

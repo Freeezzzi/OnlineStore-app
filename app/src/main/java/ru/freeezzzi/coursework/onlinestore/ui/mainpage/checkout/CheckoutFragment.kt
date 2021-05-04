@@ -40,6 +40,11 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
         binding.recyclerView2.adapter = listAdapter
         binding.recyclerView2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+        // Для корректного выбоар даты и времени обнулим счетчик
+        timeListAdapter.resetCount()
+        dateListAdapter.resetCount()
+
+        setUpAddressCard()
         setUpValues()
         setUpClickListeners()
         listAdapter.submitList(viewModel.productsList)
@@ -62,6 +67,8 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
                     super.onSelectionChanged()
                     if (!timeListTracker!!.selection.isEmpty) {
                         viewModel.deliveryTime = timeListAdapter.currentList[timeListTracker!!.selection.elementAt(0).toInt()]
+                    } else {
+                        viewModel.deliveryTime = ""
                     }
                 }
             }
@@ -86,6 +93,8 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
                     super.onSelectionChanged()
                     if (!dateListTracker!!.selection.isEmpty) {
                         viewModel.deliveryDate = dateListAdapter.currentList[dateListTracker!!.selection.elementAt(0).toInt()]
+                    } else {
+                        viewModel.deliveryDate = ""
                     }
                 }
             }
@@ -136,6 +145,22 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
         }
     }
 
+    fun setUpAddressCard() {
+        if (viewModel.user.address == null) {
+            binding.checkoutAddressCard.addressCardLabel.text = getString(R.string.choose_address)
+            binding.checkoutAddressCard.addressCartAddress.visibility = View.INVISIBLE
+            binding.checkoutAddressCard.addressCartName.visibility = View.INVISIBLE
+            return
+        }
+        binding.checkoutAddressCard.let {
+            it.addressCartAddress.visibility = View.VISIBLE
+            it.addressCartName.visibility = View.VISIBLE
+            it.addressCardLabel.text = getString(R.string.default_address_type)
+            it.addressCartAddress.text = viewModel.user.address!!.toStringWithoutPhoneAndName()
+            it.addressCartName.text = viewModel.user.address!!.toStringPhoneName()
+        }
+    }
+
     fun openBTD() {
         val btd = BottomSheetBehavior.from(binding.dateTimeBottomSheet.root)
         btd.state = BottomSheetBehavior.STATE_EXPANDED
@@ -156,7 +181,9 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
             }
         })
         binding.dateTimeBottomSheet.dateTimeSaveButton.setOnClickListener {
-            // TODO save date and time
+            if (viewModel.deliveryTime.isNotBlank() && viewModel.deliveryDate.isNotBlank()) {
+                binding.checkoutTimeCardTitle.text = viewModel.deliveryDate + " " + viewModel.deliveryTime
+            }
             btd.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
@@ -165,9 +192,9 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
         val dates = mutableListOf<String>()
         var time = Calendar.getInstance().timeInMillis
         for (i in 0 until 7) {
-            val formatted = SimpleDateFormat("E dd MMM").format(time)
-            dates.add(formatted)
             time += ONE_DAY
+            val formatted = SimpleDateFormat("EEEE d MMM").format(time)
+            dates.add(formatted)
         }
         return dates
     }

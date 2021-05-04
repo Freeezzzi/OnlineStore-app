@@ -15,6 +15,7 @@ class TimePickerListAdapter() : ListAdapter<String, TimePickerItemViewHolder>(DI
         setHasStableIds(true)
     }
     var tracker: SelectionTracker<Long>? = null
+    var count = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimePickerItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,7 +25,11 @@ class TimePickerListAdapter() : ListAdapter<String, TimePickerItemViewHolder>(DI
 
     override fun onBindViewHolder(holder: TimePickerItemViewHolder, position: Int) {
         tracker?.let {
+            if (count >= currentList.size && tracker!!.selection.size() == 0){
+                tracker!!.select(position.toLong())
+            }
             holder.onBind(getItem(position), it.isSelected(position.toLong()))
+            count++
             holder.itemView.setOnClickListener {
                 tracker!!.clearSelection()
                 tracker!!.select(position.toLong())
@@ -32,6 +37,8 @@ class TimePickerListAdapter() : ListAdapter<String, TimePickerItemViewHolder>(DI
             }
         }
     }
+
+    fun resetCount() { count = 0 }
 
     override fun getItemId(position: Int): Long = position.toLong()
 

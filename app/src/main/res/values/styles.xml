@@ -21,4 +21,15 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="MyCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <style name="ActivatedCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/pale_orange</item>
+        <item name="strokeWidth">4dp</item>
+        <item name="strokeColor">@color/orange</item>
+    </style>
+
 </resources>

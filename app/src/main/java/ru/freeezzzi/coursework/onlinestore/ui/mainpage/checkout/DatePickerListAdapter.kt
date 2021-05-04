@@ -15,6 +15,7 @@ class DatePickerListAdapter() : ListAdapter<String, DatePickerItemViewHolder>(DI
         setHasStableIds(true)
     }
     var tracker: SelectionTracker<Long>? = null
+    var count = 0 // показывает весь ли лист уже отображается
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DatePickerItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,6 +25,11 @@ class DatePickerListAdapter() : ListAdapter<String, DatePickerItemViewHolder>(DI
 
     override fun onBindViewHolder(holder: DatePickerItemViewHolder, position: Int) {
         tracker?.let {
+            if (count >= currentList.size && tracker!!.selection.size() == 0) {
+                tracker!!.select(position.toLong())
+            }
+            holder.onBind(getItem(position), it.isSelected(position.toLong()))
+            count++
             holder.onBind(getItem(position), it.isSelected(position.toLong()))
             holder.itemView.setOnClickListener {
                 tracker!!.clearSelection()
@@ -33,6 +39,9 @@ class DatePickerListAdapter() : ListAdapter<String, DatePickerItemViewHolder>(DI
         }
     }
 
+    override fun getItemId(position: Int): Long = position.toLong()
+
+    fun resetCount() { count = 0 }
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<String>() {

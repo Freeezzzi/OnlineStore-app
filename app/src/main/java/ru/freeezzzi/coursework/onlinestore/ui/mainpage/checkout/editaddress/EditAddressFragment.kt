@@ -20,13 +20,13 @@ class EditAddressFragment : BaseFragment(R.layout.edit_address) {
     override fun initViews(view: View) {
         super.initViews(view)
 
-        //Toolbar
+        // Toolbar
         binding.editAddressToolbar.toolbarTitle.setText(getString(R.string.edit_address))
         binding.editAddressToolbar.toolbarBackButton.setOnClickListener {
             Navigation.findNavController(binding.root).navigateUp()
         }
 
-        //основной UI
+        // основной UI
         binding.editAddressName.setText(viewModel.user.name)
         val slots = PredefinedSlots.RUS_PHONE_NUMBER
         val formatWatcher = MaskFormatWatcher(MaskImpl.createTerminated(slots))
@@ -45,12 +45,12 @@ class EditAddressFragment : BaseFragment(R.layout.edit_address) {
                 binding.editAddressStreet.text.isNotBlank()
             ) {
                 viewModel.saveAddress(
-                        name = binding.editAddressName.text.toString(),
-                        phone = binding.editAddressPhone.text.toString(),
-                        streetAndHouse = binding.editAddressStreet.text.toString(),
-                        apart = binding.editAddressFlatnum.text.toString(),
-                        floor = binding.editAddressFloor.text.toString(),
-                        entrance = binding.editAddressEntranceNum.text.toString()
+                    name = binding.editAddressName.text.toString(),
+                    phone = binding.editAddressPhone.text.toString(),
+                    streetAndHouse = binding.editAddressStreet.text.toString(),
+                    apart = binding.editAddressFlatnum.text.toString(),
+                    floor = binding.editAddressFloor.text.toString(),
+                    entrance = binding.editAddressEntranceNum.text.toString()
                 )
                 Navigation.findNavController(binding.root).navigateUp()
             } else {

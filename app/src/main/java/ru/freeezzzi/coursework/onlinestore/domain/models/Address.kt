@@ -11,4 +11,8 @@ data class Address(
     override fun toString(): String {
         return "$name $phone $streetAndHouse $apart entr. $entrance floor $floor"
     }
+
+    fun toStringWithoutPhoneAndName(): String = "$streetAndHouse $apart entr. $entrance floor $floor"
+
+    fun toStringPhoneName():String = "$name $phone"
 }
