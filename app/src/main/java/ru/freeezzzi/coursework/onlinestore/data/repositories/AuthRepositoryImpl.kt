@@ -71,19 +71,16 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateUserOnServer(user: User): OperationResult<Boolean, String?> =
-            try {
-                val result = serverApi.updateUser(
-                        token = user.token,
-                        userProfileDTO = fromUser(user)
-                )
+        try {
+            val result = serverApi.updateUser(
+                token = user.token,
+                userProfileDTO = fromUser(user)
+            )
 
-                prefsStorage.saveToSharedPref(user)
+            prefsStorage.saveToSharedPref(user)
 
-                OperationResult.Success(result)
-            } catch (e: Exception) {
-                OperationResult.Error(e.message)
-            }
-
-
-
+            OperationResult.Success(result)
+        } catch (e: Exception) {
+            OperationResult.Error(e.message)
+        }
 }

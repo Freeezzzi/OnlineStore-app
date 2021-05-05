@@ -23,6 +23,7 @@ class EditProfileFragment() : BaseFragment(R.layout.edit_profile) {
     override fun initViews(view: View) {
         super.initViews(view)
 
+        viewModel.clearChangeResult()
         viewModel.changeResult.observe(viewLifecycleOwner, ::changeResult)
 
         // Toolbar
@@ -78,9 +79,18 @@ class EditProfileFragment() : BaseFragment(R.layout.edit_profile) {
     }
 
     fun changeResult(state: ViewState<Boolean, String?>) {
-        when(state){
-            //is ViewState.Success ->
-
+        when (state) {
+            is ViewState.Success -> {
+                binding.editProfileProgressBar.visibility = View.INVISIBLE
+                Navigation.findNavController(binding.root).navigateUp()
+            }
+            is ViewState.Loading -> {
+                binding.editProfileProgressBar.visibility = View.VISIBLE
+            }
+            is ViewState.Error -> {
+                binding.editProfileProgressBar.visibility = View.INVISIBLE
+                // TODO show error
+            }
         }
     }
 

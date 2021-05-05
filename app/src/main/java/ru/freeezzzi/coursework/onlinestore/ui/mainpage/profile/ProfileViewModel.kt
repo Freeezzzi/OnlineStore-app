@@ -21,12 +21,16 @@ class ProfileViewModel @Inject constructor(
     private val mutableUser = MutableLiveData<User>(authRepository.loadUser())
     val user: LiveData<User> get() = mutableUser
 
-    private val mutableChangeResult = MutableLiveData<ViewState<Boolean, String?>>()
+    private var mutableChangeResult = MutableLiveData<ViewState<Boolean, String?>>()
     val changeResult: LiveData<ViewState<Boolean, String?>> get() = mutableChangeResult
 
     private val mutableOrdersList = MutableLiveData<ViewState<List<Order>, String?>>()
     val ordersList: LiveData<ViewState<List<Order>, String?>> get() = mutableOrdersList
     private var fullOrdersList: List<Order> = mutableListOf<Order>()
+
+    fun clearChangeResult() {
+        mutableChangeResult = MutableLiveData<ViewState<Boolean, String?>>()
+    }
 
     fun getOrders(type: Int) { // Order companion object
         viewModelScope.launch {
@@ -49,6 +53,18 @@ class ProfileViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun filterOrders(orderType: Int) {
+        if(orderType == Order.ORDERS_ALL){
+            mutableOrdersList.value = ViewState.success(fullOrdersList)
+            return
+        }
+        val requiredList = mutableListOf<Order>()
+        fullOrdersList.forEach {
+            if (it.status == orderType) requiredList.add(it)
+        }
+        mutableOrdersList.value = ViewState.success(requiredList)
     }
 
     fun logOut() {

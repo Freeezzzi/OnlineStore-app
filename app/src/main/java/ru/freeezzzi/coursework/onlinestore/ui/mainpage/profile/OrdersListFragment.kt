@@ -30,6 +30,7 @@ class OrdersListFragment() : BaseFragment(R.layout.orders_list_fragment) {
         super.initViews(view)
 
         // TODO сделать запрос в зависимтости от аргумента
+        viewModel.getOrders(if (args.orderType == -1) Order.ORDERS_ALL else args.orderType)
 
         binding.ordersFragmentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.ordersFragmentRecyclerview.adapter = listAdapter
@@ -43,7 +44,7 @@ class OrdersListFragment() : BaseFragment(R.layout.orders_list_fragment) {
         }
 
         binding.ordersSwipeRefreshLayout.setOnRefreshListener {
-            // TODO запросить у viewModel данные в зависимости от чипа
+            viewModel.getOrders(getOrdersType())
         }
     }
 
@@ -67,15 +68,37 @@ class OrdersListFragment() : BaseFragment(R.layout.orders_list_fragment) {
     fun fillChipGroup() {
         val stringRes = mutableListOf<Int>(R.string.all, R.string.placed, R.string.preparing, R.string.on_the_way, R.string.delivered)
         stringRes.forEach {
-            val chip = Chip(context)
+            val chip = layoutInflater.inflate(R.layout.custom_chip, binding.ordersFragmentChipgroup, false) as Chip
             chip.setChipBackgroundColorResource(R.color.white)
             chip.setEnsureMinTouchTargetSize(false)
             chip.setText(getString(it))
             chip.setOnClickListener {
-                // TODO фильтровать значения
-                // chip selected
+                binding.ordersFragmentChipgroup.check(it.id)
             }
             binding.ordersFragmentChipgroup.addView(chip)
+            setChipSelected(chip)
         }
+        binding.ordersFragmentChipgroup.setOnCheckedChangeListener { group, checkedId ->
+            viewModel.filterOrders(getOrdersType())
+        }
+    }
+
+    fun getOrdersType(): Int {
+        val id = binding.ordersFragmentChipgroup.checkedChipId
+        val chip = binding.ordersFragmentChipgroup.findViewById<Chip>(id)
+        if (chip.text.toString() == getString(R.string.all)) return Order.ORDERS_ALL
+        if (chip.text.toString() == getString(R.string.placed)) return Order.STATUS_PLACED
+        if (chip.text.toString() == getString(R.string.preparing)) return Order.STATUS_PREPARING
+        if (chip.text.toString() == getString(R.string.on_the_way)) return Order.STATUS_ONTHEWAY
+        if (chip.text.toString() == getString(R.string.delivered)) return Order.STATUS_DELIVERED
+        return Order.ORDERS_ALL
+    }
+
+    fun setChipSelected(chip: Chip) {
+        if (chip.text.toString() == getString(R.string.all) && args.orderType == Order.ORDERS_ALL) binding.ordersFragmentChipgroup.check(chip.id)
+        if (chip.text.toString() == getString(R.string.placed) && args.orderType == Order.STATUS_PLACED) binding.ordersFragmentChipgroup.check(chip.id)
+        if (chip.text.toString() == getString(R.string.preparing) && args.orderType == Order.STATUS_PREPARING) binding.ordersFragmentChipgroup.check(chip.id)
+        if (chip.text.toString() == getString(R.string.on_the_way) && args.orderType == Order.STATUS_ONTHEWAY) binding.ordersFragmentChipgroup.check(chip.id)
+        if (chip.text.toString() == getString(R.string.delivered) && args.orderType == Order.STATUS_DELIVERED) binding.ordersFragmentChipgroup.check(chip.id)
     }
 }

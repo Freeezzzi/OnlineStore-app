@@ -41,6 +41,7 @@
                         android:id="@+id/orders_fragment_chipgroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:selectionRequired="true"
                         app:singleLine="true"
                         app:singleSelection="true">
 

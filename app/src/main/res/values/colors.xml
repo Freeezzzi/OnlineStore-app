@@ -24,4 +24,5 @@
     <color name="stroke_blue">#9DC7ED</color>
     <color name="green">#D3EDD0</color>
     <color name="stroke_green">#87C984</color>
+    <color name="text_gray">#808080</color>
 </resources>
