@@ -1,4 +1,4 @@
-package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile
+package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.orderslist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

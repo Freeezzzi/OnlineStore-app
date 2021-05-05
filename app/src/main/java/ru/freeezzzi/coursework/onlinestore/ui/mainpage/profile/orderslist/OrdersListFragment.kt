@@ -1,5 +1,6 @@
-package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile
+package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.orderslist
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -12,6 +13,7 @@ import ru.freeezzzi.coursework.onlinestore.databinding.OrdersListFragmentBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Order
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.ViewState
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.ProfileViewModel
 
 class OrdersListFragment() : BaseFragment(R.layout.orders_list_fragment) {
     private val binding by viewBinding(OrdersListFragmentBinding::bind)
@@ -20,17 +22,21 @@ class OrdersListFragment() : BaseFragment(R.layout.orders_list_fragment) {
 
     private val listAdapter = OrdersListAdapter(
         itemClickAction = {
-            // TODO открывать другой фрагмент
+            val action = OrdersListFragmentDirections.actionOrdersListFragmentToSingleOrderFragment(it)
+            Navigation.findNavController(binding.root).navigate(action)
         }
     )
 
     private val args: OrdersListFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.getOrders(if (args.orderType == -1) Order.ORDERS_ALL else args.orderType)
+    }
+
     override fun initViews(view: View) {
         super.initViews(view)
-
-        // TODO сделать запрос в зависимтости от аргумента
-        viewModel.getOrders(if (args.orderType == -1) Order.ORDERS_ALL else args.orderType)
 
         binding.ordersFragmentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.ordersFragmentRecyclerview.adapter = listAdapter
@@ -76,7 +82,7 @@ class OrdersListFragment() : BaseFragment(R.layout.orders_list_fragment) {
                 binding.ordersFragmentChipgroup.check(it.id)
             }
             binding.ordersFragmentChipgroup.addView(chip)
-            setChipSelected(chip)
+            if(binding.ordersFragmentChipgroup.checkedChipIds.size == 0) setChipSelected(chip)
         }
         binding.ordersFragmentChipgroup.setOnCheckedChangeListener { group, checkedId ->
             viewModel.filterOrders(getOrdersType())

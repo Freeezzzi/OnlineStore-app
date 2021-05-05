@@ -44,13 +44,29 @@
         tools:layout="@layout/edit_profile"/>
     <fragment
         android:id="@+id/ordersListFragment"
-        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.OrdersListFragment"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.orderslist.OrdersListFragment"
         android:label="OrdersListFragment"
         tools:layout="@layout/orders_list_fragment">
         <argument
             android:name="order_type"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_ordersListFragment_to_singleOrderFragment"
+            app:destination="@id/singleOrderFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleOrderFragment"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.singleorder.SingleOrderFragment"
+        android:label="SingleOrderFragment"
+        tools:layout="@layout/order_fragment">
+        <argument
+            android:name="order"
+            app:argType="ru.freeezzzi.coursework.onlinestore.domain.models.Order" />
     </fragment>
 
 </navigation>

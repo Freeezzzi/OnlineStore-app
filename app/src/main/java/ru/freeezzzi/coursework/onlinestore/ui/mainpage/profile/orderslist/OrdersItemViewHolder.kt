@@ -1,4 +1,4 @@
-package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile
+package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.orderslist
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,10 +44,12 @@ class OrdersItemViewHolder(
 
         binding.orderItemPlacedValue.text = order.orderTime
         var sum = 0
+        var count = 0
         order.products.forEach {
             sum += it.price.toInt() * it.countInCart
+            count += it.countInCart
         }
-        binding.orderItemCost.text = sum.toString().toPrice()
-        binding.orderItemCount.text = order.products.size.toString()
+        binding.orderItemCost.text = (if (sum >= 700) sum else sum + 200).toString().toPrice()
+        binding.orderItemCount.text = String.format(binding.root.resources.getString(R.string.items_count), count)
     }
 }

@@ -69,4 +69,8 @@
     <string name="edit_profile">Edit profile</string>
     <string name="new_password">New password</string>
     <string name="orders_count">%1d orders</string>
+    <string name="placed_date">Placed:</string>
+    <string name="items_count">%1d items</string>
+    <string name="order_again">Order again</string>
+    <string name="order_num">Order #%1d | %2s</string>
 </resources>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/order_toolbar"
+        layout="@layout/label_and_back_toolbar"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white_grey">
+
+
+                <TextView
+                    android:id="@+id/order_num_and_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="TextView"
+                    android:textColor="@color/black_custom"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="16dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
+
+                <TextView
+                    android:id="@+id/order_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    android:textColor="@color/black_custom"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24"
+                    app:layout_constraintTop_toBottomOf="@+id/order_num_and_date" />
+
+                <TextView
+                    android:id="@+id/order_delivery_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="TextView"
+                    android:textColor="@color/black_custom"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24"
+                    app:layout_constraintTop_toBottomOf="@+id/order_address" />
+
+                <TextView
+                    android:id="@+id/order_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintStart_toEndOf="@+id/order_delivery_time"
+                    app:layout_constraintTop_toTopOf="@+id/order_delivery_time" />
+
+                <include
+                    android:id="@+id/order_placed_status_card"
+                    layout="@layout/order_status_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24"
+                    app:layout_constraintTop_toBottomOf="@+id/order_delivery_time" />
+
+                <include
+                    android:id="@+id/order_preparing_status_card"
+                    layout="@layout/order_status_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/order_placed_status_card"
+                    app:layout_constraintTop_toTopOf="@+id/order_placed_status_card"
+                    app:layout_constraintEnd_toStartOf="@+id/order_ontheway_status_card"/>
+
+                <include
+                    android:id="@+id/order_ontheway_status_card"
+                    layout="@layout/order_status_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/order_delivered_status_card"
+                    app:layout_constraintStart_toEndOf="@+id/order_preparing_status_card"
+                    app:layout_constraintTop_toTopOf="@+id/order_preparing_status_card" />
+
+                <include
+                    android:id="@+id/order_delivered_status_card"
+                    layout="@layout/order_status_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline25"
+                    app:layout_constraintTop_toTopOf="@+id/order_ontheway_status_card" />
+
+                <TextView
+                    android:id="@+id/order_items_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="TextView"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24"
+                    app:layout_constraintTop_toBottomOf="@+id/order_placed_status_card" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/order_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toTopOf="@+id/order_subtotal"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline25"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24"
+                    app:layout_constraintTop_toBottomOf="@+id/order_items_count" />
+
+                <TextView
+                    android:id="@+id/order_subtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/subtotal"
+                    android:textColor="@color/black_custom"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/order_deliveryfee"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24" />
+
+                <TextView
+                    android:id="@+id/order_subtotal_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/order_subtotal"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline25" />
+
+                <TextView
+                    android:id="@+id/order_deliveryfee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/delivery_fee"
+                    android:textColor="@color/black_custom"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view16"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24" />
+
+                <TextView
+                    android:id="@+id/order_deliveryfee_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/order_deliveryfee"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline25" />
+
+                <View
+                    android:id="@+id/view16"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toTopOf="@+id/order_total"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline25"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24" />
+
+                <TextView
+                    android:id="@+id/order_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/total"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/order_again_button"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24" />
+
+                <TextView
+                    android:id="@+id/order_total_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/order_total"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline25" />
+
+                <Button
+                    android:id="@+id/order_again_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/rounded_corners_right"
+                    android:text="@string/order_again"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline25"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/bg_order"
+            android:background="@color/dim_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include
+            android:id="@+id/order_bottom_sheet"
+            layout="@layout/product_bottom_sheet"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

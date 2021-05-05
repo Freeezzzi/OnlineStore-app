@@ -4,10 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:strokeWidth="1dp"
-    app:cardCornerRadius="@dimen/rounded_corner_rad">
+    android:layout_marginStart="3dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="3dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="@dimen/rounded_corner_rad"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/order_constraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,7 +20,9 @@
             android:id="@+id/order_item_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:text="TextView"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/guideline21"
             app:layout_constraintTop_toTopOf="@+id/guideline22" />
 
@@ -44,7 +51,8 @@
             android:id="@+id/order_item_placed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/placed_date"
             app:layout_constraintStart_toStartOf="@+id/guideline21"
             app:layout_constraintTop_toBottomOf="@+id/order_item_status" />
 
@@ -52,7 +60,10 @@
             android:id="@+id/order_item_placed_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="sans-serif-black"
             android:text="TextView"
+            android:textColor="@color/black_custom"
             app:layout_constraintStart_toEndOf="@+id/order_item_placed"
             app:layout_constraintTop_toBottomOf="@+id/order_item_status" />
 
@@ -60,7 +71,10 @@
             android:id="@+id/order_item_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:text="TextView"
+            android:textColor="@color/black_custom"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline23"
             app:layout_constraintTop_toTopOf="@+id/guideline22" />
 
@@ -68,9 +82,10 @@
             android:id="@+id/order_item_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/items_count"
             app:layout_constraintEnd_toStartOf="@+id/guideline23"
-            app:layout_constraintTop_toBottomOf="@+id/order_item_cost" />
+            app:layout_constraintTop_toTopOf="@+id/order_item_placed_value" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/order_item_recyclerview"
