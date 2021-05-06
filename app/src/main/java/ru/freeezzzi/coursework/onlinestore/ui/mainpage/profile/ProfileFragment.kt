@@ -1,6 +1,7 @@
 package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -48,6 +49,16 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
             Navigation.findNavController(binding.root).navigate(action)
         }
+        binding.textView21.setOnClickListener {
+            val orderType = Order.ORDERS_ALL
+            val action = ProfileFragmentDirections.actionProfileFragmentToOrdersListFragment(orderType)
+            Navigation.findNavController(binding.root).navigate(action)
+        }
+        binding.imageView9.setOnClickListener {
+            val orderType = Order.ORDERS_ALL
+            val action = ProfileFragmentDirections.actionProfileFragmentToOrdersListFragment(orderType)
+            Navigation.findNavController(binding.root).navigate(action)
+        }
     }
 
     fun setUpToolbar(){
@@ -57,6 +68,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private fun fillDeliveryStatus(card: OrderStatusCardBinding, orderStatus: String, backgroundColor: Int, strokeColor:Int) {
         card.let {
+            it.orderStatusText.typeface = Typeface.DEFAULT_BOLD
             it.orderStatusText.text = orderStatus
             it.materialCardView4.setCardBackgroundColor(resources.getColor(backgroundColor))
             it.materialCardView4.strokeColor = binding.root.resources.getColor(strokeColor)

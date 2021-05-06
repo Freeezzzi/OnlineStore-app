@@ -9,6 +9,7 @@ import ru.freeezzzi.coursework.onlinestore.di.scopes.ViewModelKey
 import ru.freeezzzi.coursework.onlinestore.di.viewmodels.ViewModelFactory
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.home.HomeViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.ProfileViewModel
 
 @Module()
@@ -31,4 +32,9 @@ abstract class ViewModelFactoryModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 }

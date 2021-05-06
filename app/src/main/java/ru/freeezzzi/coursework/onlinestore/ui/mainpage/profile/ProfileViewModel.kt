@@ -38,6 +38,10 @@ class ProfileViewModel @Inject constructor(
             when (val result = ordersRepository.getOrders(user.value!!.id)) {
                 is OperationResult.Success -> {
                     fullOrdersList = result.data
+                    if (type == Order.ORDERS_ALL) {
+                        mutableOrdersList.value = ViewState.success(fullOrdersList)
+                        return@launch
+                    }
                     val requiredList = mutableListOf<Order>()
                     fullOrdersList.forEach {
                         if (it.status == type) requiredList.add(it)
@@ -56,7 +60,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun filterOrders(orderType: Int) {
-        if(orderType == Order.ORDERS_ALL){
+        if (orderType == Order.ORDERS_ALL) {
             mutableOrdersList.value = ViewState.success(fullOrdersList)
             return
         }

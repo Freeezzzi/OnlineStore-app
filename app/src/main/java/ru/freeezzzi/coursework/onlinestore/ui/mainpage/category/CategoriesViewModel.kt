@@ -16,7 +16,6 @@ class CategoriesViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val mutableCategoriesList = MutableLiveData<ViewState<List<Category>, String?>>()
-
     val categoriesList: LiveData<ViewState<List<Category>, String?>>
         get() = mutableCategoriesList
 

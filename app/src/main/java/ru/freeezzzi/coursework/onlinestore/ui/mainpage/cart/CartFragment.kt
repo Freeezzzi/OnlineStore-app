@@ -42,6 +42,7 @@ class CartFragment : BaseFragment(R.layout.cart_fragment) {
 
     fun cartListChanged(newValue: List<Product>) {
         listAdapter.submitList(newValue)
+        listAdapter.notifyDataSetChanged() // Это нужно делать так как часто у нас одна и та же ссылка на продукт показывается в разных фрагментах и сложно отследить измененимя
         var subtotal = 0
         var itemCount = 0
         newValue.forEach {

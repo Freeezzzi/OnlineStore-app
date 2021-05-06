@@ -59,8 +59,10 @@ class SingleOrderFragment : BaseFragment(R.layout.order_fragment) {
         }
         binding.orderAgainButton.setOnClickListener {
             args.order.products.forEach {
+                val productCopy = it.copy()
+                productCopy.countInCart = 0
                 for (i in 0 until it.countInCart) {
-                    cartViewModel.addOneItem(it)
+                    cartViewModel.addOneItem(productCopy)
                 }
             }
         }

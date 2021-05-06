@@ -1,20 +1,18 @@
 package ru.freeezzzi.coursework.onlinestore.di.modules
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.InternalCoroutinesApi
+import ru.freeezzzi.coursework.onlinestore.data.local.LocalDatabase
 import javax.inject.Singleton
 
 @Module
 internal class AppModule {
-/*    private val cicerone: Cicerone<Router> = Cicerone.create()
 
+    @InternalCoroutinesApi
     @Provides
     @Singleton
-    fun provideRouter(): Router =
-        cicerone.router
-
-    @Provides
-    @Singleton
-    fun provideNavigatorHolder(): NavigatorHolder =
-        cicerone.getNavigatorHolder()*/
+    fun provideDatabase(appContext: Context): LocalDatabase =
+        LocalDatabase.getInstance(appContext)
 }

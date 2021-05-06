@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.domain.models.Address
+import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.domain.models.User
 import javax.inject.Inject
 

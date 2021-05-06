@@ -43,4 +43,15 @@ class ProductsRepositoryImpl @Inject constructor(
         } catch (e: Throwable) {
             OperationResult.Error(e.message)
         }
+
+    override suspend fun getProductByIds(ids:List<Long>): OperationResult<List<Product>, String?> =
+        try {
+            val products = serverAPI.getProductsByIds(authRepositoryImpl.loadUser()!!.token, ids).map {
+                it.toProduct()
+            }
+
+            OperationResult.Success(products)
+        } catch (e: Throwable) {
+            OperationResult.Error(e.message)
+        }
 }

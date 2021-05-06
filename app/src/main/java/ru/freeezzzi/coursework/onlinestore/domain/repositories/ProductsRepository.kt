@@ -9,4 +9,6 @@ interface ProductsRepository {
     suspend fun getPopularProducts(): OperationResult<List<Product>, String?>
 
     suspend fun getProductsOnSale(): OperationResult<List<Product>, String?>
+
+    suspend fun getProductByIds(ids: List<Long>): OperationResult<List<Product>, String?>
 }

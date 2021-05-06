@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.BindsInstance
 import dagger.Component
 import ru.freeezzzi.coursework.onlinestore.App
+import ru.freeezzzi.coursework.onlinestore.data.local.LocalDatabase
 import ru.freeezzzi.coursework.onlinestore.di.modules.*
 import ru.freeezzzi.coursework.onlinestore.di.modules.AppModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.DataModule
@@ -33,6 +34,8 @@ interface AppComponent {
     fun provideAuthRepository(): AuthRepository
 
     fun provideOrdersRepository(): OrdersRepository
+
+    fun provideFavoriteCompaniesDatabase(): LocalDatabase
 
     fun inject(app: App)
 

@@ -64,17 +64,19 @@
                     android:id="@+id/order_delivery_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="TextView"
                     android:textColor="@color/black_custom"
-                    app:layout_constraintStart_toStartOf="@+id/guideline24"
-                    app:layout_constraintTop_toBottomOf="@+id/order_address" />
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="@+id/textView" />
 
                 <TextView
                     android:id="@+id/order_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
                     android:text="TextView"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/order_delivery_time"
                     app:layout_constraintTop_toTopOf="@+id/order_delivery_time" />
 
@@ -127,6 +129,7 @@
                     android:id="@+id/order_recycler_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="20dp"
                     app:layout_constraintBottom_toTopOf="@+id/order_subtotal"
                     app:layout_constraintEnd_toStartOf="@+id/guideline25"
@@ -230,6 +233,15 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline25"
                     app:layout_constraintStart_toStartOf="@+id/guideline24" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/delivery"
+                    app:layout_constraintStart_toStartOf="@+id/guideline24"
+                    app:layout_constraintTop_toBottomOf="@+id/order_address" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
