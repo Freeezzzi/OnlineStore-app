@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.freeezzzi.coursework.onlinestore.data.local.LocalDatabase
 import ru.freeezzzi.coursework.onlinestore.domain.OperationResult
 import ru.freeezzzi.coursework.onlinestore.domain.models.Address
 import ru.freeezzzi.coursework.onlinestore.domain.models.Order
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val ordersRepository: OrdersRepository
+    private val ordersRepository: OrdersRepository,
+    private val database: LocalDatabase
 ) : ViewModel() {
     private val mutableUser = MutableLiveData<User>(authRepository.loadUser())
     val user: LiveData<User> get() = mutableUser
@@ -72,7 +74,11 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun logOut() {
-        authRepository.logOut()
+        viewModelScope.launch {
+            database.productsDao().deleteRecentlyWatchedTable()
+            database.productsDao().deleteCartTable()
+            authRepository.logOut()
+        }
     }
 
     fun saveAddress(name: String, phone: String, streetAndHouse: String, apart: String, entrance: String, floor: String) {

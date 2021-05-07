@@ -23,4 +23,13 @@ interface ProductsDao {
 
     @Delete
     suspend fun delete(recentlyWatchedId: RecentlyWatchedId): Unit
+
+    @Query("DELETE FROM recentlyWatched WHERE id = :recentlyWatchedId")
+    suspend fun deletePrevious(recentlyWatchedId: Long): Unit
+
+    @Query("DELETE FROM  cart")
+    suspend fun deleteCartTable()
+
+    @Query("DELETE FROM recentlyWatched")
+    suspend fun deleteRecentlyWatchedTable()
 }

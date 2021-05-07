@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.freeezzzi.coursework.onlinestore.data.local.LocalDatabase
-import ru.freeezzzi.coursework.onlinestore.data.local.entities.CartProductId
 import ru.freeezzzi.coursework.onlinestore.data.local.entities.RecentlyWatchedId
 import ru.freeezzzi.coursework.onlinestore.domain.OperationResult
 import ru.freeezzzi.coursework.onlinestore.domain.models.Category
@@ -22,10 +21,9 @@ class HomeViewModel @Inject constructor(
     private val productsRepository: ProductsRepository,
     private val database: LocalDatabase
 ) : ViewModel() {
-    // TODO recently watched
     private val mutableRecentlyWatched = MutableLiveData<ViewState<List<Product>, String?>>()
     val recentlyWatched: LiveData<ViewState<List<Product>, String?>>
-        get() = mutableOnSaleProductsList
+        get() = mutableRecentlyWatched
 
     // On sale
     private val mutableOnSaleProductsList = MutableLiveData<ViewState<List<Product>, String?>>()
@@ -88,7 +86,9 @@ class HomeViewModel @Inject constructor(
 
     fun saveToRecentlyWathced(product: Product) {
         viewModelScope.launch {
+            database.productsDao().deletePrevious(product.id!!)
             database.productsDao().insert(RecentlyWatchedId(Calendar.getInstance().timeInMillis, product.id))
+            getRecentlyWathced()
         }
     }
 
@@ -98,7 +98,7 @@ class HomeViewModel @Inject constructor(
             val ids = mutableListOf<Long>()
             database.productsDao().getRecentlyWatched().forEach { ids.add(it.id ?: 0) }
             when (val result = productsRepository.getProductByIds(ids)) {
-                is OperationResult.Success -> mutableRecentlyWatched.value = ViewState.success(result.data)
+                is OperationResult.Success -> mutableRecentlyWatched.value = ViewState.success(result.data.reversed())
                 is OperationResult.Error -> mutableRecentlyWatched.value = ViewState.error(
                     mutableListOf(), result.data
                 )

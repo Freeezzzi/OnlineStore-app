@@ -19,6 +19,7 @@ import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.ViewState
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.home.HomeViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.setPicture
 import ru.freeezzzi.coursework.onlinestore.ui.toPrice
 
@@ -27,6 +28,8 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
     private val binding by viewBinding(SalesFragmentBinding::bind)
 
     private val args: SalesFragmentArgs by navArgs()
+
+    private val homeViewModel : HomeViewModel by activityViewModels()
 
     private val listAdapter = SalesListAdapter(
         itemOnClickAction = ::productClicked,
@@ -82,6 +85,7 @@ class SalesFragment : BaseFragment(R.layout.sales_fragment) {
      * Заполняется и открывается Bottom sheet dialog
      */
     private fun productClicked(product: Product) {
+        homeViewModel.saveToRecentlyWathced(product)
         binding.salesBottomSheet.productSheetImage.setPicture(product.imageUrl)
         binding.salesBottomSheet.also {
             it.productSheetLabel.text = product.title
