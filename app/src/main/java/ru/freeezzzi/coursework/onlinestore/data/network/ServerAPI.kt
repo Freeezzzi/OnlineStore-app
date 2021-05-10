@@ -62,4 +62,9 @@ interface ServerAPI {
         @Query("Token")token: String,
         @Body userProfileDTO: UserProfileDTO
     ): Boolean
+
+    @GET("recipes/all")
+    suspend fun getRecipes(
+        @Query("Token")token: String
+    ): List<RecipeDTO>
 }

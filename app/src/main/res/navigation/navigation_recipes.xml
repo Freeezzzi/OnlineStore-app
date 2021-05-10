@@ -9,6 +9,22 @@
         android:id="@+id/recipes_fragment"
         android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.recipes.RecipesFragment"
         android:label="RecipesFragment"
-        tools:layout="@layout/recipes_fragment"/>
+        tools:layout="@layout/recipes_fragment">
+        <action
+            android:id="@+id/action_recipes_fragment_to_singleRecipeFragment"
+            app:destination="@id/singleRecipeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleRecipeFragment"
+        android:name="ru.freeezzzi.coursework.onlinestore.ui.mainpage.recipes.singlerecipe.SingleRecipeFragment"
+        android:label="SingleRecipeFragment" >
+        <argument
+            android:name="recipe"
+            app:argType="ru.freeezzzi.coursework.onlinestore.domain.models.Recipe" />
+    </fragment>
 
 </navigation>

@@ -2,14 +2,8 @@ package ru.freeezzzi.coursework.onlinestore.di.modules
 
 import dagger.Binds
 import dagger.Module
-import ru.freeezzzi.coursework.onlinestore.data.repositories.AuthRepositoryImpl
-import ru.freeezzzi.coursework.onlinestore.data.repositories.CategoriesRepositoryImpl
-import ru.freeezzzi.coursework.onlinestore.data.repositories.OrdersRepositoryImpl
-import ru.freeezzzi.coursework.onlinestore.data.repositories.ProductsRepositoryImpl
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesRepository
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.OrdersRepository
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.ProductsRepository
+import ru.freeezzzi.coursework.onlinestore.data.repositories.*
+import ru.freeezzzi.coursework.onlinestore.domain.repositories.*
 import javax.inject.Singleton
 
 @Module
@@ -29,4 +23,8 @@ internal abstract class DataModule {
     @Binds
     @Singleton
     abstract fun provideOrdersRepository(ordersRepositoryImpl: OrdersRepositoryImpl): OrdersRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideRecipesRepository(recipesRepositoryImpl: RecipesRepositoryImpl): RecipesRepository
 }

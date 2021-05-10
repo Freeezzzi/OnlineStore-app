@@ -75,4 +75,11 @@
     <string name="order_num">Order #%1d | %2s</string>
     <string name="delivery">Delivery:</string>
     <string name="set_address">Set address</string>
+    <string name="filter_by">Filter by</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="steps_to_make_it">Steps to make it</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="recipes">Recipes</string>
 </resources>

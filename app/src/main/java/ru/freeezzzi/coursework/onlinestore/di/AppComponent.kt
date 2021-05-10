@@ -10,10 +10,7 @@ import ru.freeezzzi.coursework.onlinestore.di.modules.*
 import ru.freeezzzi.coursework.onlinestore.di.modules.AppModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.DataModule
 import ru.freeezzzi.coursework.onlinestore.di.modules.NetworkModule
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.CategoriesRepository
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.OrdersRepository
-import ru.freeezzzi.coursework.onlinestore.domain.repositories.ProductsRepository
+import ru.freeezzzi.coursework.onlinestore.domain.repositories.*
 import ru.freeezzzi.coursework.onlinestore.ui.MainActivity
 import ru.freeezzzi.coursework.onlinestore.ui.SplashActivity
 import ru.freeezzzi.coursework.onlinestore.ui.loginregistration.LoginActivity
@@ -24,7 +21,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class, DataModule::class, NetworkModule::class, ViewModelFactoryModule::class])
 interface AppComponent {
-    // fun provideRouter(): Router
     fun provideViewModelFactory(): ViewModelProvider.Factory
 
     fun provideCategoriesRepository(): CategoriesRepository
@@ -34,6 +30,8 @@ interface AppComponent {
     fun provideAuthRepository(): AuthRepository
 
     fun provideOrdersRepository(): OrdersRepository
+
+    fun provideRecipesRepository():RecipesRepository
 
     fun provideFavoriteCompaniesDatabase(): LocalDatabase
 
