@@ -97,9 +97,10 @@
                     android:layout_height="24dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:background="@drawable/ic_wallet"
+                    android:backgroundTint="@color/orange"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/payment_method_balance"
@@ -117,6 +118,7 @@
                     android:id="@+id/balance_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,10 +140,11 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/orange"
+                    android:background="@drawable/ic_dollar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view10"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:layout_constraintTop_toBottomOf="@+id/view10" />
 
                 <TextView
                     android:id="@+id/textView22"
@@ -159,6 +162,7 @@
                     android:id="@+id/card_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view10" />
             </androidx.constraintlayout.widget.ConstraintLayout>

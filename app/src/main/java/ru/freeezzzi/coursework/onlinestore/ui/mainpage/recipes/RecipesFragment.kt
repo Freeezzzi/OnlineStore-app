@@ -17,6 +17,7 @@ import ru.freeezzzi.coursework.onlinestore.domain.models.Recipe
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.ViewState
 
+// TODO bsd
 class RecipesFragment : BaseFragment(R.layout.recipes_fragment) {
     private val binding: RecipesFragmentBinding by viewBinding(RecipesFragmentBinding::bind)
 

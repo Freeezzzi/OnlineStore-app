@@ -2,6 +2,7 @@ package ru.freeezzzi.coursework.onlinestore.domain.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
 data class Product(
     val id: Long?,
@@ -17,7 +18,7 @@ data class Product(
     val weight: String,
     // only local field
     var countInCart: Int
-) : Parcelable {
+) : Parcelable, Serializable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Long::class.java.classLoader) as? Long,
         parcel.readString().toString(),

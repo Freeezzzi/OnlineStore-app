@@ -6,7 +6,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.Transformation
 import ru.freeezzzi.coursework.onlinestore.R
 
 fun View.hideKeyboard() {
@@ -16,7 +15,7 @@ fun View.hideKeyboard() {
 
 fun String.toPrice() = this + Html.fromHtml(" &#x20bd")
 
-fun ImageView.setPicture(imageUrl: String, ) {
+fun ImageView.setPicture(imageUrl: String) {
     if (imageUrl.isEmpty()) {
         this.setImageResource(R.color.white)
     } else {

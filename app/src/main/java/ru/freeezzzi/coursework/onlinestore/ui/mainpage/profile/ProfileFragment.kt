@@ -3,10 +3,10 @@ package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile
 import android.content.Intent
 import android.graphics.Typeface
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.databinding.OrderStatusCardBinding
@@ -27,11 +27,11 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         fillUi()
         setUpToolbar()
 
-        //set up delivery cards
-        fillDeliveryStatus(binding.placedStatusCard, getString(R.string.placed),R.color.dark_orange, R.color.stroke_dark_orange)
-        fillDeliveryStatus(binding.preparingStatusCard, getString(R.string.preparing),R.color.yellow, R.color.stroke_yellow)
-        fillDeliveryStatus(binding.onthewayStatusCard, getString(R.string.on_the_way),R.color.blue, R.color.stroke_blue)
-        fillDeliveryStatus(binding.deliveredStatusCard, getString(R.string.delivered),R.color.green, R.color.stroke_green)
+        // set up delivery cards
+        fillDeliveryStatus(binding.placedStatusCard, getString(R.string.placed), R.color.dark_orange, R.color.stroke_dark_orange,R.drawable.ic_wallet)
+        fillDeliveryStatus(binding.preparingStatusCard, getString(R.string.preparing), R.color.yellow, R.color.stroke_yellow,R.drawable.ic_shopping)
+        fillDeliveryStatus(binding.onthewayStatusCard, getString(R.string.on_the_way), R.color.blue, R.color.stroke_blue,R.drawable.ic_sports_car)
+        fillDeliveryStatus(binding.deliveredStatusCard, getString(R.string.delivered), R.color.green, R.color.stroke_green,R.drawable.ic_happy)
     }
 
     private fun setOnClickListeners() {
@@ -61,17 +61,18 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         }
     }
 
-    fun setUpToolbar(){
+    fun setUpToolbar() {
         binding.profileToolbar.toolbarBackButton.visibility = View.INVISIBLE
         binding.profileToolbar.toolbarTitle.text = getString(R.string.profile)
     }
 
-    private fun fillDeliveryStatus(card: OrderStatusCardBinding, orderStatus: String, backgroundColor: Int, strokeColor:Int) {
+    private fun fillDeliveryStatus(card: OrderStatusCardBinding, orderStatus: String, backgroundColor: Int, strokeColor: Int, imageResourse:Int) {
         card.let {
             it.orderStatusText.typeface = Typeface.DEFAULT_BOLD
             it.orderStatusText.text = orderStatus
             it.materialCardView4.setCardBackgroundColor(resources.getColor(backgroundColor))
             it.materialCardView4.strokeColor = binding.root.resources.getColor(strokeColor)
+            it.orderStatusImage.setImageDrawable(resources.getDrawable(imageResourse))
             it.root.setOnClickListener {
                 var orderType = Order.ORDERS_ALL
                 if (orderStatus == getString(R.string.placed)) orderType = Order.STATUS_PLACED
@@ -81,7 +82,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                 val action = ProfileFragmentDirections.actionProfileFragmentToOrdersListFragment(orderType)
                 Navigation.findNavController(binding.root).navigate(action)
             }
-            //TODO setPicture
+            // TODO setPicture
         }
     }
 

@@ -3,26 +3,26 @@
     <item
         android:id="@+id/navigation_home"
         android:menuCategory="secondary"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_home"
         android:title="@string/menu_home"/>
     <item
         android:id="@+id/navigation_categories"
         android:menuCategory="secondary"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_categories"
         android:title="@string/menu_categories"/>
     <item
         android:id="@+id/navigation_recipes"
         android:menuCategory="secondary"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_cook_book"
         android:title="@string/menu_recipes"/>
     <item
         android:id="@+id/navigation_cart"
         android:menuCategory="secondary"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_outline_shopping_cart_24"
         android:title="@string/menu_cart"/>
     <item
         android:id="@+id/navigation_profile"
         android:menuCategory="secondary"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_user"
         android:title="@string/menu_profile" />
 </menu>

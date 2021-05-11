@@ -67,4 +67,10 @@ interface ServerAPI {
     suspend fun getRecipes(
         @Query("Token")token: String
     ): List<RecipeDTO>
+
+    @POST("recipes/add")
+    suspend fun addRecipe(
+        @Query("Token")token: String,
+        @Body recipe: RecipeDTO
+    ): Boolean
 }
