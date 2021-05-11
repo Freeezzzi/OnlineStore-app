@@ -3,7 +3,6 @@ package ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile
 import android.content.Intent
 import android.graphics.Typeface
 import android.view.View
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -14,6 +13,7 @@ import ru.freeezzzi.coursework.onlinestore.databinding.ProfileFragmentBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Order
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
 import ru.freeezzzi.coursework.onlinestore.ui.SplashActivity
+import ru.freeezzzi.coursework.onlinestore.ui.toPrice
 
 class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
     private val binding by viewBinding(ProfileFragmentBinding::bind)
@@ -88,8 +88,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
     private fun fillUi() {
         binding.profileCard.apply {
             profile_name.text = viewModel.user.value!!.name
-            profile_phone.text = viewModel.user.value!!.phone
-            // TODO set picture
+            profile_balance.text = String.format(getString(R.string.payment_method_balance), viewModel.user.value!!.balance.toString().toPrice())
         }
     }
 }

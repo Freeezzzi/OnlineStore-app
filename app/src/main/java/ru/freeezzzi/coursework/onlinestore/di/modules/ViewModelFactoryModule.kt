@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap
 import ru.freeezzzi.coursework.onlinestore.di.scopes.ViewModelKey
 import ru.freeezzzi.coursework.onlinestore.di.viewmodels.ViewModelFactory
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.category.CategoriesViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.checkout.CheckoutViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.home.HomeViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.ProfileViewModel
@@ -37,4 +38,9 @@ abstract class ViewModelFactoryModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoriesViewModel::class)
+    abstract fun bindCategoriesViewModel(categoriesViewModel: CategoriesViewModel): ViewModel
 }

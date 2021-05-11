@@ -39,7 +39,7 @@ class PaymentFragment : BaseFragment(R.layout.payment_fragment) {
 
     fun orderStatus(newValue: ViewState<Boolean, String?>) {
         when (newValue) {
-            is ViewState.Success -> binding.paymentMethodBalance.text = "0" //TODO выйти из активити
+            is ViewState.Success -> requireActivity().finish() //TODO выйти из активити
             is ViewState.Loading -> binding.paymentMethodBalance.text = "2" // TODO loading
             //is ViewState.Error -> //TODO show error
         }

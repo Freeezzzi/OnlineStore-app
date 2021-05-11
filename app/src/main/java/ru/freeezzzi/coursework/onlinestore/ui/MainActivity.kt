@@ -12,6 +12,7 @@ import ru.freeezzzi.coursework.onlinestore.databinding.ActivityMainBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.domain.repositories.AuthRepository
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.cart.CartViewModel
+import ru.freeezzzi.coursework.onlinestore.ui.mainpage.category.CategoriesViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.home.HomeViewModel
 import ru.freeezzzi.coursework.onlinestore.ui.mainpage.profile.ProfileViewModel
 import javax.inject.Inject
@@ -28,6 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private val homeViewModel: HomeViewModel by viewModels { viewModelFactory }
 
+    private val categoriesViewModel: CategoriesViewModel by viewModels { viewModelFactory }
+
     private var bottomNavManager: BottomNavManager? = null
 
     @Inject
@@ -43,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         cartViewModel.cartList.observe(this, ::cartChanged)
         profileViewModel.user
         homeViewModel.categoriesList
+        categoriesViewModel.categoriesList
 
         cartViewModel.loadCart()
         homeViewModel.getRecentlyWathced()

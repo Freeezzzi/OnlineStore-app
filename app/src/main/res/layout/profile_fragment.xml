@@ -37,30 +37,30 @@
                     android:id="@+id/imageView6"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/ic_happy"
+                    android:backgroundTint="@color/orange"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/profile_phone"
+                    android:id="@+id/profile_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif-black"
                     android:text="TextView"
                     android:textColor="@color/black_custom"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toStartOf="@+id/profile_name"
                     app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
                 <TextView
                     android:id="@+id/profile_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginBottom="24dp"
                     android:fontFamily="sans-serif-black"
                     android:text="TextView"

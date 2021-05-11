@@ -1,9 +1,11 @@
 package ru.freeezzzi.coursework.onlinestore.ui.mainpage.category
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -23,9 +25,7 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
     private val listAdapter = CategoriesListAdapter()
 
-    private val viewModel: CategoriesViewModel by viewModels(
-        factoryProducer = { CategoriesViewModelFactory() }
-    )
+    private val viewModel: CategoriesViewModel by activityViewModels()
 
     override fun initViews(view: View) {
         super.initViews(view)
@@ -37,9 +37,8 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
         binding.recyclerView.adapter = listAdapter
         binding.categoriesRefreshLayout.setOnRefreshListener { viewModel.getCategories() }
 
-        viewModel.getCategories()
-
         viewModel.categoriesList.observe(viewLifecycleOwner, ::categoriesChanged)
+        viewModel.getCategories()
     }
 
     private fun categoriesChanged(newValue: ViewState<List<Category>, String?>) {
@@ -100,12 +99,3 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
     }
 }
 
-private class CategoriesViewModelFactory() : ViewModelProvider.Factory {
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DaggerCategoriesViewModelComponent.builder()
-            .appComponent(App.appComponent)
-            .build()
-            .provideViewModel() as T
-    }
-}
