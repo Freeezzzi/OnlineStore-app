@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.freeezzzi.coursework.onlinestore.R
 import ru.freeezzzi.coursework.onlinestore.databinding.OrderFragmentBinding
+import ru.freeezzzi.coursework.onlinestore.databinding.OrderStatusCardBinding
 import ru.freeezzzi.coursework.onlinestore.domain.models.Order
 import ru.freeezzzi.coursework.onlinestore.domain.models.Product
 import ru.freeezzzi.coursework.onlinestore.ui.BaseFragment
@@ -57,6 +58,7 @@ class SingleOrderFragment : BaseFragment(R.layout.order_fragment) {
             // Order again button
             binding.orderAgainButton.visibility = View.VISIBLE
         }
+        setUpDeliveryCards()
         binding.orderAgainButton.setOnClickListener {
             args.order.products.forEach {
                 val productCopy = it.copy()
@@ -83,6 +85,9 @@ class SingleOrderFragment : BaseFragment(R.layout.order_fragment) {
         listAdapter.submitList(args.order.products)
     }
 
+    /*
+    Открывает bsd
+     */
     private fun productClicked(product: Product) {
         binding.orderBottomSheet.productSheetImage.setPicture(product.imageUrl)
         binding.orderBottomSheet.also {
@@ -113,5 +118,57 @@ class SingleOrderFragment : BaseFragment(R.layout.order_fragment) {
                 binding.orderToolbar.bgToolbarCheckout.alpha = slideOffset
             }
         })
+    }
+
+    // закомменченные строки вызывают смену цвета на картиник во всем приложении до перезапуска
+    private fun setUpDeliveryCards() {
+        val order = args.order
+        if (order.status == Order.STATUS_PLACED) {
+            fillDeliveryStatus(binding.orderPlacedStatusCard, R.color.dark_orange, R.color.stroke_dark_orange, R.drawable.ic_wallet)
+        } else {
+            fillDeliveryStatus(binding.orderPlacedStatusCard, R.color.white, R.color.gray1, R.drawable.ic_wallet)
+        }
+        // preparing
+        if (order.status == Order.STATUS_PREPARING) {
+            fillDeliveryStatus(binding.orderPreparingStatusCard, R.color.yellow, R.color.stroke_yellow, R.drawable.ic_shopping)
+        } else if (order.status > Order.STATUS_PREPARING) {
+            fillDeliveryStatus(binding.orderPreparingStatusCard, R.color.white, R.color.gray1, R.drawable.ic_shopping)
+        } else {
+            fillDeliveryStatus(binding.orderPreparingStatusCard, R.color.gray1, R.color.gray1, R.drawable.ic_shopping)
+            /*val unwrappedDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_shopping)
+            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
+            DrawableCompat.setTint(wrappedDrawable, resources.getColor(R.color.text_gray))
+            binding.orderPreparingStatusCard.orderStatusImage.setImageDrawable(wrappedDrawable)*/
+        }
+        // on the way
+        if (order.status == Order.STATUS_ONTHEWAY) {
+            fillDeliveryStatus(binding.orderOnthewayStatusCard, R.color.blue, R.color.stroke_blue, R.drawable.ic_sports_car)
+        } else if (order.status > Order.STATUS_ONTHEWAY) {
+            fillDeliveryStatus(binding.orderOnthewayStatusCard, R.color.white, R.color.gray1, R.drawable.ic_sports_car)
+        } else {
+            fillDeliveryStatus(binding.orderOnthewayStatusCard, R.color.gray1, R.color.gray1, R.drawable.ic_sports_car)
+            /*val unwrappedDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_sports_car)
+            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
+            DrawableCompat.setTint(wrappedDrawable, resources.getColor(R.color.text_gray))
+            binding.orderOnthewayStatusCard.orderStatusImage.setImageDrawable(wrappedDrawable)*/
+        }
+        // delivered
+        if (order.status == Order.STATUS_DELIVERED) {
+            fillDeliveryStatus(binding.orderDeliveredStatusCard, R.color.green, R.color.stroke_green, R.drawable.ic_happy)
+        } else {
+            fillDeliveryStatus(binding.orderDeliveredStatusCard, R.color.gray1, R.color.gray1, R.drawable.ic_happy)
+            /*val unwrappedDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_happy)
+            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
+            DrawableCompat.setTint(wrappedDrawable, resources.getColor(R.color.text_gray))
+            binding.orderDeliveredStatusCard.orderStatusImage.setImageDrawable(wrappedDrawable)*/
+        }
+    }
+
+    private fun fillDeliveryStatus(card: OrderStatusCardBinding, backgroundColor: Int, strokeColor: Int, imageResourse: Int) {
+        card.let {
+            it.materialCardView4.setCardBackgroundColor(resources.getColor(backgroundColor))
+            it.materialCardView4.strokeColor = binding.root.resources.getColor(strokeColor)
+            it.orderStatusImage.setImageDrawable(resources.getDrawable(imageResourse))
+        }
     }
 }

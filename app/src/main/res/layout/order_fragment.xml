@@ -89,14 +89,36 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline24"
                     app:layout_constraintTop_toBottomOf="@+id/order_delivery_time" />
 
+                <View
+                    android:id="@+id/placed_to_preparing"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/order_placed_status_card"
+                    app:layout_constraintEnd_toStartOf="@+id/order_preparing_status_card"
+                    app:layout_constraintStart_toEndOf="@+id/order_placed_status_card"
+                    app:layout_constraintTop_toTopOf="@+id/order_placed_status_card" />
+
                 <include
                     android:id="@+id/order_preparing_status_card"
                     layout="@layout/order_status_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/order_ontheway_status_card"
                     app:layout_constraintStart_toEndOf="@+id/order_placed_status_card"
-                    app:layout_constraintTop_toTopOf="@+id/order_placed_status_card"
-                    app:layout_constraintEnd_toStartOf="@+id/order_ontheway_status_card"/>
+                    app:layout_constraintTop_toTopOf="@+id/order_placed_status_card" />
+
+                <View
+                    android:id="@+id/preparing_to_ontheway"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/order_placed_status_card"
+                    app:layout_constraintEnd_toStartOf="@+id/order_ontheway_status_card"
+                    app:layout_constraintStart_toEndOf="@+id/order_preparing_status_card"
+                    app:layout_constraintTop_toTopOf="@+id/order_placed_status_card" />
 
                 <include
                     android:id="@+id/order_ontheway_status_card"
@@ -106,6 +128,17 @@
                     app:layout_constraintEnd_toStartOf="@+id/order_delivered_status_card"
                     app:layout_constraintStart_toEndOf="@+id/order_preparing_status_card"
                     app:layout_constraintTop_toTopOf="@+id/order_preparing_status_card" />
+
+                <View
+                    android:id="@+id/ontheway_to_delivered"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/order_placed_status_card"
+                    app:layout_constraintEnd_toStartOf="@+id/order_delivered_status_card"
+                    app:layout_constraintStart_toEndOf="@+id/order_ontheway_status_card"
+                    app:layout_constraintTop_toTopOf="@+id/order_placed_status_card" />
 
                 <include
                     android:id="@+id/order_delivered_status_card"

@@ -82,7 +82,6 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                 val action = ProfileFragmentDirections.actionProfileFragmentToOrdersListFragment(orderType)
                 Navigation.findNavController(binding.root).navigate(action)
             }
-            // TODO setPicture
         }
     }
 
