@@ -1,7 +1,6 @@
 package ru.freeezzzi.coursework.onlinestore.ui.mainpage.recipes.singlerecipe
 
 import android.view.View
-import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -55,6 +54,7 @@ class SingleRecipeFragment : BaseFragment(R.layout.recipe_fragment) {
 
         binding.recipeIngredientsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.recipeIngredientsRecyclerview.adapter = ingredientsListAdapter
+        binding.recipeIngredientsRecyclerview.isNestedScrollingEnabled = false
 
         val ingredients = mutableListOf<Ingredient>()
         args.recipe.ingredientNames.forEachIndexed { index, s ->
@@ -71,23 +71,26 @@ class SingleRecipeFragment : BaseFragment(R.layout.recipe_fragment) {
 
         binding.recipeStepsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recipeStepsRecyclerView.adapter = stepsListAdapter
+        binding.recipeStepsRecyclerView.isNestedScrollingEnabled = false
 
         val steps = mutableListOf<Step>()
         args.recipe.stepsInfo.forEachIndexed { index, s ->
-            steps.add(Step(
-                stepImage = args.recipe.stepsImages.get(index),
-                stepInfo = s
-            ))
+            steps.add(
+                Step(
+                    stepImage = args.recipe.stepsImages.get(index),
+                    stepInfo = s
+                )
+            )
         }
         stepsListAdapter.submitList(steps)
     }
 
-    fun addItemAction(product: Product){
+    fun addItemAction(product: Product) {
         cartViewModel.addOneItem(product)
         ingredientsListAdapter.notifyDataSetChanged()
     }
 
-    fun removeItemAction(product: Product){
+    fun removeItemAction(product: Product) {
         cartViewModel.removeOneItem(product)
         ingredientsListAdapter.notifyDataSetChanged()
     }

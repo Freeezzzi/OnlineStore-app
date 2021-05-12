@@ -51,10 +51,6 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         homeViewModel.recentlyWatched.observe(viewLifecycleOwner, ::recentlyWatchedChanged)
         homeViewModel.onSaleproductsList.observe(viewLifecycleOwner, ::onSaleChanged)
 
-        homeViewModel.getCategories()
-        homeViewModel.getProductsOnSale()
-        homeViewModel.getRecentlyWathced()
-
         if (profileViewModel.user.value!!.address == null) {
             binding.homeToolbar.homeLocationText.text = getString(R.string.set_address)
         } else {
@@ -83,6 +79,9 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
         //TODO добавить прослышивание обновления
         // TODO не забыть првоеряьбь есть ли айтем в корзине при загрузке и при переходе обратно в этот фрагмент (onBackpressed)
+        homeViewModel.getCategories()
+        homeViewModel.getProductsOnSale()
+        homeViewModel.getRecentlyWathced()
     }
 
     private fun categoriesChanged(newValue: ViewState<List<Category>, String?>) {
