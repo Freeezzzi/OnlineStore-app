@@ -23,6 +23,7 @@ class PaymentFragment : BaseFragment(R.layout.payment_fragment) {
         viewModel.productsList.forEach {
             sum += it.countInCart * it.price.toInt()
         }
+        sum= if (sum >= 700) sum else sum + 200
         binding.paymentTotal.text = sum.toString().toPrice()
         binding.paymentMethodBalance.text = getString(R.string.payment_method_balance, viewModel.user.balance.toString().toPrice())
         binding.paymentPayButton.setOnClickListener {

@@ -22,7 +22,7 @@ class CheckoutActivity : AppCompatActivity(R.layout.checkout_activity) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.productsList = checkoutActivityArgs.Products.toList()
+        viewModel.productsList = checkoutActivityArgs.Products.toMutableList()
     }
 
     override fun attachBaseContext(newBase: Context) {

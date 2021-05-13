@@ -124,7 +124,7 @@ class CheckoutFragment : BaseFragment(R.layout.checkout_fragment) {
     fun setUpClickListeners() {
         binding.checkoutToolbar.toolbarBackButton.setOnClickListener {
             // TODO вернуться из активности
-            Navigation.findNavController(binding.root).navigateUp()
+            requireActivity().finish()
         }
         binding.checkoutAddressCard.root.setOnClickListener {
             val action = CheckoutFragmentDirections.actionCheckoutFragmentToEditAddressFragment()
